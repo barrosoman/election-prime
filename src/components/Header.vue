@@ -12,7 +12,7 @@
     <nav class="navbar">
       <ul>
         <li>
-          <a href="/dashboard">
+          <router-link to="/dashboard">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -30,10 +30,10 @@
               <rect x="3" y="14" width="7" height="7"></rect>
             </svg>
             <span>Painel de Controle</span>
-          </a>
+          </router-link>
         </li>
         <li>
-          <a href="/data">
+          <router-link to="/data">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -52,18 +52,25 @@
               <line x1="12" y1="22.08" x2="12" y2="12"></line>
             </svg>
             <span>Dados</span>
-          </a>
+          </router-link>
         </li>
       </ul>
     </nav>
   </div>
-  <div class="test">Testing</div>
+  <div class="page-name-container">
+    <span>{{ name }}</span>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
+  props: {
+    name: {
+      type: String
+    }
+  },
   data() {
     return {
       timerId: -1,
@@ -240,5 +247,23 @@ svg {
 
 .active {
   color: #5156be !important;
+}
+
+.page-name-container {
+  /* Test Only */
+  /* background: blue; */
+
+  position: absolute;
+  margin-top: 125px;
+  line-height: 70px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 18px;
+  color: #495057;
+  font-weight: 600;
+  padding: 0 7.5%;
+  display: flex;
+  justify-content: space-between;
+  left: 0;
+  right: 0;
 }
 </style>
