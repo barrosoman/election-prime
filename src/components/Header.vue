@@ -4,7 +4,7 @@
       <div class="logo">Grupo RRJ</div>
       <div class="time">
         <span>{{ textDay }}</span>
-        <span>{{ hours }}:{{ minutes }}</span>
+        <span>{{ hours }}:{{ paddedMinutes }}</span>
       </div>
     </div>
   </header>
@@ -105,6 +105,9 @@ export default defineComponent({
         default:
           throw 'Unexpected value'
       }
+    },
+    paddedMinutes() {
+      return (this.minutes < 10 ? '0' : '') + this.minutes
     }
   },
   methods: {
