@@ -2,10 +2,7 @@
   <header>
     <div class="navbar-header">
       <div class="logo">Grupo RRJ</div>
-      <div class="time">
-        <span>{{ textDay }}</span>
-        <span>{{ hours }}:{{ paddedMinutes }}</span>
-      </div>
+      <Date class="time" />
     </div>
   </header>
   <div class="topnav">
@@ -65,58 +62,16 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
+import Date from './Date.vue'
+
 export default defineComponent({
   props: {
     name: {
       type: String
     }
   },
-  data() {
-    return {
-      timerId: -1,
-      day: new Date().getDay(),
-      hours: new Date().getHours(),
-      minutes: new Date().getMinutes()
-    }
-  },
-  mounted() {
-    this.timerId = window.setInterval(this.updateDateTime, 1000)
-  },
-  unmounted() {
-    if (this.timerId !== -1) window.clearTimeout(this.timerId)
-  },
-  computed: {
-    textDay() {
-      switch (this.day) {
-        case 0:
-          return 'Domingo'
-        case 1:
-          return 'Segunda-Feira'
-        case 2:
-          return 'Terça-Feira'
-        case 3:
-          return 'Quarta-Feira'
-        case 4:
-          return 'Quinta-Feira'
-        case 5:
-          return 'Sexta-Feira'
-        case 6:
-          return 'Sábado'
-        default:
-          throw 'Unexpected value'
-      }
-    },
-    paddedMinutes() {
-      return (this.minutes < 10 ? '0' : '') + this.minutes
-    }
-  },
-  methods: {
-    updateDateTime() {
-      const date = new Date()
-      this.day = date.getDay()
-      this.hours = date.getHours()
-      this.minutes = date.getMinutes()
-    }
+  components: {
+    Date
   }
 })
 </script>
@@ -166,7 +121,7 @@ header {
   align-self: center;
 }
 
-.time span {
+.time::v-deep span {
   display: block;
   text-align: center;
 }
