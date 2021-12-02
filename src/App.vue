@@ -1,23 +1,19 @@
 <template>
-  <Header />
+  <router-view></router-view>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import Header from './components/Header.vue'
-
 export default defineComponent({
   name: 'App',
-  components: {
-    Header
-  }
+  components: {}
 })
 </script>
 
 <style>
 /* Import Fonts */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
 
 * {
   box-sizing: border-box;
