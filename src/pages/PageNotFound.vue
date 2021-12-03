@@ -6,11 +6,7 @@
       4
     </div>
     <div class="error-text">Desculpe, página não encontrada!</div>
-    <div class="error-button">
-      <router-link to="/dashboard" class="error-button-link"
-        >Início</router-link
-      >
-    </div>
+    <Button content="Início" v-bind:routing="true" routingTo="/dashboard" />
     <div class="error-img">
       <img src="@/assets/page_not_found.png" alt="" />
     </div>
@@ -20,7 +16,13 @@
 <script>
 import { defineComponent } from 'vue'
 
-export default defineComponent({})
+import Button from '@/components/Button.vue'
+
+export default defineComponent({
+  components: {
+    Button
+  }
+})
 </script>
 
 <style scoped>
@@ -56,29 +58,6 @@ export default defineComponent({})
   font-size: 1.3125rem;
   font-weight: 600;
   text-align: center;
-}
-
-.error-button {
-  padding-top: 1.75rem;
-  display: flex;
-  justify-content: center;
-}
-
-.error-button-link {
-  display: inline-block;
-  font-weight: 400;
-  line-height: 1.5;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-  padding: 0.47rem 0.75rem;
-  font-size: 0.875rem;
-  border-radius: 0.25rem;
-  box-shadow: 0 2px 6px 0 rgba(127, 127, 220, 1);
-  color: #fff;
-  background-color: #7a7fdc;
-  border-color: #7a7fdc;
-  text-decoration: none;
 }
 
 .error-img {
