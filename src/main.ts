@@ -4,6 +4,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import App from './App.vue'
 import Dashboard from './pages/Dashboard.vue'
 import Data from './pages/Data.vue'
+import PageNotFound from './pages/PageNotFound.vue'
 
 const routes = [
   {
@@ -17,6 +18,10 @@ const routes = [
   {
     path: '/data',
     component: Data
+  },
+  {
+    path: '/:catchAll(.*)',
+    component: PageNotFound
   }
 ]
 
