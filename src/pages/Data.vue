@@ -3,15 +3,42 @@
   <div class="data-page">
     <Card
       title="Envie seus dados"
-      subtitle="Abaixo você pode inserir os dados que serão analisados e a formatação dos dados de entrada pode ser visualizado logo abaixo."
+      subtitle="Abaixo você pode inserir os dados que serão analisados e a formatação dos dados de entrada pode ser visualizado no fim da página."
     >
       <FileUploader />
+    </Card>
+    <Card
+      class="mt-3"
+      title="Histórico de envios"
+      subtitle="Consulte os últimos envios de dados"
+    >
+      <div class="no-data-sent">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          style="fill: rgba(116, 120, 141, 1); transform: ; msfilter: "
+        >
+          <path
+            d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+          ></path>
+        </svg>
+        <h3>Você não enviou nenhum dado :(</h3>
+      </div>
     </Card>
     <Card
       class="mt-3"
       title="Estrutura dos dados de entrada"
       subtitle="A estrutura informa o usuário como deve ser estruturado os dados de entrada para que a aplicação possa fazer a análise"
     >
+      <template v-slot:header>
+        <ul class="history-list">
+          <li class="history-list-title">Legenda</li>
+          <li>IVP - Intenção de Voto a Presidência</li>
+          <li>IVG - Intenção de Voto a Gorvernador</li>
+        </ul>
+      </template>
       <div class="table-container">
         <table>
           <thead>
@@ -327,5 +354,41 @@ td {
 
 tr:nth-child(even) {
   background-color: #f8f9fa;
+}
+
+.no-data-sent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.75;
+}
+
+.no-data-sent svg {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 0.5rem;
+}
+
+.no-data-sent h3 {
+  color: #495057;
+  font-size: 1.3125rem;
+  font-weight: 400;
+}
+
+.history-list {
+  font-size: 14px;
+  color: #495057;
+  list-style: none;
+}
+
+.history-list-title {
+  font-size: 14px;
+  font-weight: 700;
+  padding-left: 0 !important;
+  opacity: 0.75;
+}
+
+.history-list li {
+  padding: 0.5rem 0 0 0.75rem;
 }
 </style>
