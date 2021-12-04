@@ -1,12 +1,13 @@
 <template>
   <div>
-    <span>{{ textDay }}</span>
-    <span>{{ hours }}:{{ paddedMinutes }}</span>
+    <span>{{ formatDay(day) }}</span>
+    <span>{{ formatSimpleHour(hours, minutes) }}</span>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { formatDay, formatSimpleHour } from '@/util/dateFormatter'
 
 export default defineComponent({
   data() {
@@ -23,32 +24,9 @@ export default defineComponent({
   unmounted() {
     if (this.timerId !== -1) window.clearTimeout(this.timerId)
   },
-  computed: {
-    textDay() {
-      switch (this.day) {
-        case 0:
-          return 'Domingo'
-        case 1:
-          return 'Segunda-Feira'
-        case 2:
-          return 'Terça-Feira'
-        case 3:
-          return 'Quarta-Feira'
-        case 4:
-          return 'Quinta-Feira'
-        case 5:
-          return 'Sexta-Feira'
-        case 6:
-          return 'Sábado'
-        default:
-          throw 'Unexpected value'
-      }
-    },
-    paddedMinutes(): string {
-      return (this.minutes < 10 ? '0' : '') + this.minutes
-    }
-  },
   methods: {
+    formatDay,
+    formatSimpleHour,
     updateDateTime() {
       const date = new Date()
       this.day = date.getDay()
