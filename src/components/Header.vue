@@ -55,7 +55,7 @@
     </nav>
   </div>
   <div class="page-name-container">
-    <span>{{ name }}</span>
+    <span>{{ name.name }}</span>
   </div>
 </template>
 

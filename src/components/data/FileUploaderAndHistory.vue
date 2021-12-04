@@ -66,7 +66,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { formatSimpleDate } from '@/util/dateFormatter'
-import { getFileHistory } from '@/util/storage'
+import { clearFileHistory, getFileHistory } from '@/util/storage'
 import { FileHistory } from '@/models/FileHistory'
 
 import Card from '@/components/Card.vue'
@@ -93,8 +93,7 @@ export default defineComponent({
       this.fileSentHistory = getFileHistory()
     },
     cleanFileSentHistory() {
-      const key = 'prob:file_history'
-      localStorage.removeItem(key)
+      clearFileHistory()
       this.fileSentHistory = []
     }
   }

@@ -1,15 +1,15 @@
 <template>
-  <Header name="Painel de Controle" />
+  <Page name="Painel de Controle"> </Page>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import Header from '@/components/Header.vue'
+import Page from '@/components/Page.vue'
 
 export default defineComponent({
   components: {
-    Header
+    Page
   }
 })
 </script>
