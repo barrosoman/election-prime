@@ -2,6 +2,7 @@
   <Header name="Dados" />
   <div class="data-page">
     <Card
+      class="mt-3"
       title="Envie seus dados"
       subtitle="Abaixo você pode inserir os dados que serão analisados e a formatação dos dados de entrada pode ser visualizado no fim da página."
     >
@@ -298,6 +299,70 @@
         </table>
       </div>
     </Card>
+    <Card
+      class="mt-3"
+      title="Tabela de valores"
+      subtitle="Verifique os possíveis valores dos dados de entrada"
+    >
+      <table>
+        <tbody>
+          <tr>
+            <th>Idade</th>
+            <td>16-99</td>
+          </tr>
+          <tr>
+            <th>Religião</th>
+            <td>Católico</td>
+            <td>Evangélico</td>
+            <td>Muçulmano</td>
+            <td>Judeu</td>
+            <td>Sem Religião</td>
+            <td>Outro</td>
+          </tr>
+          <tr>
+            <th>Etnia</th>
+            <td>Branco</td>
+            <td>Pardo</td>
+            <td>Preto</td>
+            <td>Amarelo</td>
+            <td>Indígena</td>
+            <td>Outro</td>
+          </tr>
+          <tr>
+            <th>Região</th>
+            <td>Sul</td>
+            <td>Sudeste</td>
+            <td>Centro-Oeste</td>
+            <td>Nordeste</td>
+            <td>Norte</td>
+          </tr>
+          <tr>
+            <th>Escolaridade</th>
+            <td>Sem Escolaridade</td>
+            <td>Ensino Fundamental</td>
+            <td>Ensino Médio</td>
+            <td>Ensino Superior</td>
+          </tr>
+          <tr>
+            <th>Sexo</th>
+            <td>M</td>
+            <td>F</td>
+          </tr>
+          <tr>
+            <th>Renda</th>
+            <td>Quantidade em salários mínimos</td>
+          </tr>
+          <tr>
+            <th>IVP</th>
+            <td>Definido pelo usuário</td>
+          </tr>
+          <tr>
+            <th>IVG</th>
+            <td>Definido pelo usuário</td>
+          </tr>
+        </tbody>
+      </table>
+    </Card>
   </div>
 </template>
 
@@ -329,7 +394,8 @@ export default defineComponent({
 }
 
 .mt-3 {
-  margin-top: 3rem !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
 }
 
 table {
