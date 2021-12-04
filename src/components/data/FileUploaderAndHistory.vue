@@ -28,7 +28,7 @@
         </svg>
       </div>
     </template>
-    <div v-if="fileSentHistory === null" class="no-data-sent">
+    <div v-if="fileSentHistory.length === 0" class="no-data-sent">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -66,6 +66,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { formatSimpleDate } from '@/util/dateFormatter'
+import { getFileHistory } from '@/util/storage'
+import { FileHistory } from '@/models/FileHistory'
 
 import Card from '@/components/Card.vue'
 import StripedTable from '@/components/StripedTable.vue'
@@ -79,7 +81,7 @@ export default defineComponent({
   },
   data() {
     return {
-      fileSentHistory: null as string | null
+      fileSentHistory: [] as FileHistory[]
     }
   },
   mounted() {
@@ -88,16 +90,12 @@ export default defineComponent({
   methods: {
     formatSimpleDate,
     updateFileSentHistory() {
-      const key = 'prob:file_history'
-      const fileSentHistoryString = localStorage.getItem(key)
-
-      if (fileSentHistoryString === null) this.fileSentHistory = null
-      else this.fileSentHistory = JSON.parse(fileSentHistoryString)
+      this.fileSentHistory = getFileHistory()
     },
     cleanFileSentHistory() {
       const key = 'prob:file_history'
       localStorage.removeItem(key)
-      this.fileSentHistory = null
+      this.fileSentHistory = []
     }
   }
 })
