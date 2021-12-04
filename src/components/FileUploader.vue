@@ -8,6 +8,7 @@
           autocomplete="off"
           tabindex="-1"
           style="display: none"
+          @change="previewFile"
         />
         <div class="icon-container">
           <svg
@@ -27,7 +28,23 @@
       </div>
     </div>
   </label>
-  <Button content="Enviar" />
+  <div
+    v-if="currentFile !== undefined"
+    class="preview-container"
+    :class="{ sent: fileSent }"
+  >
+    <div class="file-preview">
+      <div class="file-info">
+        <span class="file-name">{{ currentFile.name }}</span>
+        <span class="file-size">{{ currentFile.size }} Bytes</span>
+      </div>
+      <div v-if="fileSent" class="file-info-sent">
+        <span>Seu arquivo foi enviado com sucesso!</span>
+        <span>Estamos o analisando agora mesmo.</span>
+      </div>
+    </div>
+  </div>
+  <Button content="Enviar" @click="sendFile" />
 </template>
 
 <script lang="ts">
@@ -36,8 +53,50 @@ import { defineComponent } from 'vue'
 import Button from '@/components/Button.vue'
 
 export default defineComponent({
+  data() {
+    return {
+      currentFile: undefined as File | undefined,
+      fileSent: false
+    }
+  },
   components: {
     Button
+  },
+  methods: {
+    previewFile(event: any) {
+      this.currentFile = event.target.files[0]
+    },
+    sendFile() {
+      if (this.currentFile === undefined) {
+        console.warn('Tried to send an undefined file')
+        return
+      }
+
+      const key = 'prob:file_history'
+      const historyString = localStorage.getItem(key)
+      let history: []
+
+      if (historyString !== null) history = JSON.parse(historyString)
+      else history = []
+
+      const newHistory = [
+        ...history,
+        {
+          name: this.currentFile.name,
+          size: this.currentFile.size,
+          date: Date.now()
+        }
+      ]
+
+      this.fileSent = true
+
+      window.setTimeout(() => {
+        this.currentFile = undefined
+        this.fileSent = false
+      }, 8000)
+
+      localStorage.setItem(key, JSON.stringify(newHistory))
+    }
   }
 })
 </script>
@@ -74,5 +133,66 @@ export default defineComponent({
   margin-bottom: 0.5rem;
   font-weight: 600;
   line-height: 1.2;
+}
+
+.file-preview {
+  margin-top: 1.25rem !important;
+  border: 1px solid #e9e9ef !important;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  color: #495057;
+  font-size: 14px;
+}
+
+.file-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.file-size {
+  font-weight: 700;
+}
+
+.preview-container {
+  position: relative;
+}
+
+@keyframes halfFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.sent::after {
+  position: absolute;
+  top: 0;
+  background-color: #77d970;
+  content: ' ';
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  animation: halfFadeIn 1.5s;
+}
+
+.file-info-sent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 2.25rem;
+  animation: fadeIn 1.5s;
 }
 </style>
