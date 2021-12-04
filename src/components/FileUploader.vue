@@ -88,14 +88,15 @@ export default defineComponent({
         }
       ]
 
+      localStorage.setItem(key, JSON.stringify(newHistory))
+
       this.fileSent = true
+      this.$emit('sent')
 
       window.setTimeout(() => {
         this.currentFile = undefined
         this.fileSent = false
       }, 8000)
-
-      localStorage.setItem(key, JSON.stringify(newHistory))
     }
   }
 })
