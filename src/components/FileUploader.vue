@@ -1,6 +1,6 @@
 <template>
   <label for="upload">
-    <div class="container">
+    <div v-if="!fileSent" class="container">
       <div class="message" tabindex="0">
         <input
           id="upload"
@@ -44,7 +44,7 @@
       </div>
     </div>
   </div>
-  <Button content="Enviar" @click="sendFile" />
+  <Button v-if="!fileSent" content="Enviar" @click="sendFile" />
 </template>
 
 <script lang="ts">
