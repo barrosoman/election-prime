@@ -6,14 +6,31 @@
       title="Envie seus dados"
       subtitle="Abaixo você pode inserir os dados que serão analisados e a formatação dos dados de entrada pode ser visualizado no fim da página."
     >
-      <FileUploader />
+      <FileUploader @sent="updateFileSentHistory" />
     </Card>
     <Card
       class="mt-3"
       title="Histórico de envios"
       subtitle="Consulte os últimos envios de dados"
     >
-      <div class="no-data-sent">
+      <template v-slot:header>
+        <div class="clean-file-history-container">
+          <svg
+            @click="cleanFileSentHistory"
+            class="clean-file-history-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            style="fill: rgba(73, 80, 87, 1); transform: ; msfilter: "
+          >
+            <path
+              d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7H6zm4 12H8v-9h2v9zm6 0h-2v-9h2v9zm.618-15L15 2H9L7.382 4H3v2h18V4z"
+            ></path>
+          </svg>
+        </div>
+      </template>
+      <div v-if="fileSentHistory === null" class="no-data-sent">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -27,6 +44,27 @@
         </svg>
         <h3>Você não enviou nenhum dado :(</h3>
       </div>
+      <div v-else>
+        <table>
+          <thead>
+            <th>#</th>
+            <th>Arquivo</th>
+            <th>Tamanho</th>
+            <th>Data</th>
+          </thead>
+          <tbody>
+            <tr
+              v-for="(fileSent, index) in fileSentHistory"
+              :key="fileSent.date"
+            >
+              <th>{{ index + 1 }}</th>
+              <td>{{ fileSent.name }}</td>
+              <td>{{ fileSent.size }} Bytes</td>
+              <td>{{ formatSimpleDate(fileSent.date) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </Card>
     <Card
       class="mt-3"
@@ -34,8 +72,8 @@
       subtitle="A estrutura informa o usuário como deve ser estruturado os dados de entrada para que a aplicação possa fazer a análise"
     >
       <template v-slot:header>
-        <ul class="history-list">
-          <li class="history-list-title">Legenda</li>
+        <ul class="legend-list">
+          <li class="legend-list-title">Legenda</li>
           <li>IVP - Intenção de Voto a Presidência</li>
           <li>IVG - Intenção de Voto a Gorvernador</li>
         </ul>
@@ -368,6 +406,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { formatSimpleDate } from '@/util/dateFormatter'
 
 import Header from '@/components/Header.vue'
 import Card from '@/components/Card.vue'
@@ -378,6 +417,29 @@ export default defineComponent({
     Header,
     Card,
     FileUploader
+  },
+  data() {
+    return {
+      fileSentHistory: null as string | null
+    }
+  },
+  mounted() {
+    this.updateFileSentHistory()
+  },
+  methods: {
+    formatSimpleDate,
+    updateFileSentHistory() {
+      const key = 'prob:file_history'
+      const fileSentHistoryString = localStorage.getItem(key)
+
+      if (fileSentHistoryString === null) this.fileSentHistory = null
+      else this.fileSentHistory = JSON.parse(fileSentHistoryString)
+    },
+    cleanFileSentHistory() {
+      const key = 'prob:file_history'
+      localStorage.removeItem(key)
+      this.fileSentHistory = null
+    }
   }
 })
 </script>
@@ -432,29 +494,44 @@ tr:nth-child(even) {
 .no-data-sent svg {
   width: 36px;
   height: 36px;
-  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .no-data-sent h3 {
   color: #495057;
   font-size: 1.3125rem;
   font-weight: 400;
+  margin-bottom: 1.5rem;
 }
 
-.history-list {
+.legend-list {
   font-size: 14px;
   color: #495057;
   list-style: none;
 }
 
-.history-list-title {
+.legend-list-title {
   font-size: 14px;
   font-weight: 700;
   padding-left: 0 !important;
   opacity: 0.75;
 }
 
-.history-list li {
+.legend-list li {
   padding: 0.5rem 0 0 0.75rem;
+}
+
+.clean-file-history-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.clean-file-history-icon {
+  background: #e9e9ef;
+  border-radius: 6px;
+  padding: 0.5rem;
+  box-sizing: content-box;
+  cursor: pointer;
 }
 </style>
