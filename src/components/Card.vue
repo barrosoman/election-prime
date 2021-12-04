@@ -1,10 +1,13 @@
 <template>
   <div class="card">
-    <div class="card-body">
+    <div class="card-header">
       <div class="card-title">{{ title }}</div>
       <div class="card-subtitle">
         {{ subtitle }}
       </div>
+      <slot name="header" />
+    </div>
+    <div class="card-body">
       <slot />
     </div>
   </div>
@@ -38,6 +41,13 @@ export default defineComponent({
   border: 1px solid #e9e9ef;
   border-radius: 0.25rem;
   flex: 1;
+}
+
+.card-header {
+  padding: 1.25rem;
+  margin-bottom: 0;
+  background-color: #fff;
+  border-bottom: 1px solid #e9e9ef;
 }
 
 .card-body {
