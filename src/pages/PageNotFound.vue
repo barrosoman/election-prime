@@ -1,14 +1,10 @@
 <template>
-  <div class="content">
-    <div class="error-code">
-      4
-      <span>0</span>
-      4
-    </div>
-    <div class="error-text">Desculpe, página não encontrada!</div>
+  <div class="error-content">
+    <h3>Desculpe, página não encontrada!</h3>
+    <span>Volte para o início clicando no botão abaixo!</span>
     <Button content="Início" v-bind:routing="true" routingTo="/dashboard" />
     <div class="error-img">
-      <img src="@/assets/page_not_found.png" alt="" />
+      <img src="@/assets/page_not_found.svg" alt="" />
     </div>
   </div>
 </template>
@@ -26,9 +22,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.content {
-  /* Test Only */
-  /* background: red; */
+.error-content {
   font-family: 'IBM Plex Sans', sans-serif;
   width: 600px;
   height: 600px;
@@ -39,52 +33,36 @@ export default defineComponent({
 }
 
 .error-code {
-  /* Test Only */
-  /* background: blue; */
   font-size: calc(0.525rem + 5.7vw);
   font-weight: 600;
   line-height: 1.2;
   text-align: center;
 }
 
-.error-code span {
-  color: rgba(127, 127, 220, 1);
-  margin: 0 calc(-1.75rem + 0.75vw);
-}
-
-.error-text {
-  /* Test Only */
-  /* background: lightblue; */
+.error-content h3 {
   font-size: 1.3125rem;
   font-weight: 600;
   text-align: center;
 }
 
-.error-img {
-  position: relative;
+.error-content span {
+  margin-top: 0.25rem;
+  opacity: 0.8;
+  text-align: center;
 }
 
 .error-img img {
-  width: 740px;
-  height: 400px;
-  position: absolute;
-  left: -9.5%;
+  position: relative;
   margin-top: -0.25rem;
+  opacity: 0.5;
+  transform: rotate(-2.75deg);
+  z-index: -1;
 }
 
 /* <M */
 @media (max-width: 768px) {
   .error-img img {
     width: 540px;
-    height: 291px;
-    left: 5%;
-  }
-}
-
-/* <XL */
-@media (max-width: 992px) {
-  .error-code span {
-    margin: 0 calc(-0.75rem + 0.75vw);
   }
 }
 </style>
