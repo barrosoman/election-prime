@@ -31,16 +31,20 @@
   <div
     v-if="currentFile !== undefined"
     class="preview-container"
-    :class="{ sent: fileSent }"
+    :class="{ sent: fileSent, 'error-sent': errorOnSent }"
   >
     <div class="file-preview">
       <div class="file-info">
         <span class="file-name">{{ currentFile.name }}</span>
         <span class="file-size">{{ currentFile.size }} Bytes</span>
       </div>
-      <div v-if="fileSent" class="file-info-sent">
+      <div v-if="fileSent && !errorOnSent" class="file-info-sent">
         <span>Seu arquivo foi enviado com sucesso!</span>
         <span>Estamos o analisando agora mesmo.</span>
+      </div>
+      <div v-else-if="errorOnSent" class="file-info-sent">
+        <span>Houve um erro ao enviar seu arquivo!</span>
+        <span>{{ errorMessage }} </span>
       </div>
     </div>
   </div>
@@ -49,6 +53,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { Parser } from '@/util/dataParser'
+import { getFileHistory } from '@/util/storage'
+import { FILE_HISTORY_KEY, DATA_KEY } from '@/util/constants'
 
 import Button from '@/components/Button.vue'
 
@@ -56,7 +63,9 @@ export default defineComponent({
   data() {
     return {
       currentFile: undefined as File | undefined,
-      fileSent: false
+      fileSent: false,
+      errorOnSent: false,
+      errorMessage: ''
     }
   },
   components: {
@@ -67,19 +76,13 @@ export default defineComponent({
     previewFile(event: any) {
       this.currentFile = event.target.files[0]
     },
-    sendFile() {
+    async sendFile() {
       if (this.currentFile === undefined) {
         console.warn('Tried to send an undefined file')
         return
       }
 
-      const key = 'prob:file_history'
-      const historyString = localStorage.getItem(key)
-      let history: []
-
-      if (historyString !== null) history = JSON.parse(historyString)
-      else history = []
-
+      const history = getFileHistory()
       const newHistory = [
         ...history,
         {
@@ -89,14 +92,28 @@ export default defineComponent({
         }
       ]
 
-      localStorage.setItem(key, JSON.stringify(newHistory))
+      try {
+        const parser: Parser = new Parser(this.currentFile)
+        const dataInfo = await parser.parse()
 
-      this.fileSent = true
-      this.$emit('sent')
+        localStorage.setItem(FILE_HISTORY_KEY, JSON.stringify(newHistory))
+        localStorage.setItem(DATA_KEY, JSON.stringify(dataInfo))
 
+        this.fileSent = true
+        this.$emit('sent')
+      } catch (exception) {
+        console.error(exception)
+
+        this.fileSent = true
+        this.errorOnSent = true
+        this.errorMessage = exception as string
+      }
+
+      // Reset the values from data
       window.setTimeout(() => {
         this.currentFile = undefined
         this.fileSent = false
+        this.errorOnSent = false
       }, 8000)
     }
   }
@@ -188,6 +205,10 @@ export default defineComponent({
   height: 100%;
   opacity: 0.5;
   animation: halfFadeIn 1.5s;
+}
+
+.error-sent::after {
+  background-color: #dd4a48 !important;
 }
 
 .file-info-sent {
