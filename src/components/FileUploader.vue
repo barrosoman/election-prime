@@ -67,7 +67,7 @@ export default defineComponent({
     previewFile(event: any) {
       this.currentFile = event.target.files[0]
     },
-    async sendFile() {
+    sendFile() {
       if (this.currentFile === undefined) {
         console.warn('Tried to send an undefined file')
         return
