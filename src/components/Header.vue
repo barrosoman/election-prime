@@ -67,7 +67,7 @@ import Date from './Date.vue'
 export default defineComponent({
   props: {
     name: {
-      type: String
+      type: Object
     }
   },
   components: {
