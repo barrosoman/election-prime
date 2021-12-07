@@ -1,10 +1,12 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <div class="card-title">{{ title }}</div>
-      <div class="card-subtitle">
+      <div v-if="typeof title === 'string'" class="card-title">{{ title }}</div>
+      <div v-else class="card-title">{{ title.title }}</div>
+      <div v-if="typeof subtitle === 'string'" class="card-subtitle">
         {{ subtitle }}
       </div>
+      <div v-else class="card-subtitle">{{ subtitle.subtitle }}</div>
       <slot name="header" />
     </div>
     <div class="card-body">
@@ -18,12 +20,8 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   props: {
-    title: {
-      type: String
-    },
-    subtitle: {
-      type: String
-    }
+    title: {},
+    subtitle: {}
   }
 })
 </script>
