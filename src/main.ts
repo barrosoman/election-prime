@@ -1,6 +1,7 @@
-import { createApp } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
+import * as Vue from 'vue'
+import * as VueRouter from 'vue-router'
 
+import VueApexCharts from 'vue3-apexcharts'
 import App from './App.vue'
 import Dashboard from './pages/Dashboard.vue'
 import Data from './pages/Data.vue'
@@ -25,14 +26,14 @@ const routes = [
   }
 ]
 
-const router = createRouter({
-  history: createWebHistory(),
+const router = VueRouter.createRouter({
+  history: VueRouter.createWebHistory(),
   routes
 })
 
-const app = createApp(App)
+const app = Vue.createApp(App)
 
 app.use(router)
-app.mount('#app')
+app.use(VueApexCharts)
 
-// createApp(App).mount('#app')
+app.mount('#app')
