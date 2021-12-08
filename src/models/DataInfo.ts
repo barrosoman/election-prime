@@ -35,3 +35,27 @@ export interface DataInfo {
   ivp: string
   ivg: string
 }
+
+export interface SeriesData {
+  name: string /* The candidate name */
+  data: number[] /* The candidate series data */
+}
+
+/**
+ * The {@link SeriesSexData} interface is used to transmit
+ * data from the {@link DataVisualizer} into a Vue Component,
+ * more specifically a chart that will render these information.
+ */
+export interface SeriesSexData {
+  /**
+   * The array that contains all male votes from all
+   * candidates in order.
+   */
+  maleVotes: number[]
+
+  /**
+   * The array that contains all female votes from all
+   * candidates in order.
+   */
+  femaleVotes: number[]
+}
