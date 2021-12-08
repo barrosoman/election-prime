@@ -3,14 +3,20 @@ import * as VueRouter from 'vue-router'
 
 import VueApexCharts from 'vue3-apexcharts'
 import App from './App.vue'
-import Dashboard from './pages/Dashboard.vue'
-import Data from './pages/Data.vue'
-import PageNotFound from './pages/PageNotFound.vue'
+
+import Dashboard from '@/pages/Dashboard.vue'
+import Data from '@/pages/Data.vue'
+import PageNotFound from '@/pages/PageNotFound.vue'
+import Home from '@/pages/Home.vue'
 
 const routes = [
   {
     path: '/',
-    component: Dashboard
+    component: Home
+  },
+  {
+    path: '/Home',
+    component: Home
   },
   {
     path: '/dashboard',
