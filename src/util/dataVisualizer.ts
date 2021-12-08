@@ -1,4 +1,5 @@
 import { DataInfo, SeriesData, SeriesSexData } from '@/models/DataInfo'
+import { getDataInfoArray } from '@/util/storage'
 
 type RoleSelector = (dataInfo: DataInfo) => string
 
@@ -769,6 +770,17 @@ export class DataVisualizer {
     const currentValue = map.get(key)
     if (currentValue === undefined) map.set(key, defaultValue)
     else map.set(key, updateCallback(currentValue))
+  }
+
+  /**
+   * Returns the default {@link DataVisualize} that contains as
+   * {@code dataInfoArray} the default infomration storaged at
+   * {@code localStorage}.
+   *
+   * @returns an instance of {@link DataVisualizer}
+   */
+  static defaultVisualizer(): DataVisualizer {
+    return new DataVisualizer(getDataInfoArray())
   }
 }
 
