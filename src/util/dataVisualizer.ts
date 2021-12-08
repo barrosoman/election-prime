@@ -752,6 +752,17 @@ export class DataVisualizer {
   }
 
   /**
+   * Returns the array of {@link DataInfo} that has been visualized
+   * by the {@link DataVisualizer}.
+   * 
+   * @returns the array of {@link DataInfo} that has been visualized
+   *          by the {@link DataVisualizer}
+   */
+  getVisualizedData(): DataInfo[] {
+    return this.dataInfoArray
+  }
+
+  /**
    * If the key does not exists in the {@code map} then a {@code defaultValue}
    * is set to that {@code key}. Otherwise, a {@code updateCallback} function
    * is called to update the value at that {@code key}.
