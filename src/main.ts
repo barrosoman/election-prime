@@ -19,7 +19,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/dashboard',
+    path: '/graph',
     component: Dashboard
   },
   {

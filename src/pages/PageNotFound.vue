@@ -2,7 +2,7 @@
   <div class="error-content">
     <h3>Desculpe, página não encontrada!</h3>
     <span>Volte para o início clicando no botão abaixo!</span>
-    <Button content="Início" v-bind:routing="true" routingTo="/dashboard" />
+    <Button content="Início" v-bind:routing="true" routingTo="/home" />
     <div class="error-img">
       <img src="@/assets/page_not_found.svg" alt="" />
     </div>

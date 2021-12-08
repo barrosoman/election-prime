@@ -1,5 +1,5 @@
 <template>
-  <Page name="Painel de Controle">
+  <Page name="Infográficos">
     <div v-if="dataInfoArray.length === 0" class="no-data-container">
       <h3>Você não inseriu nenhum dado :(</h3>
       <span>Insira seus dados na página Dados para nós podermos analisar!</span>
