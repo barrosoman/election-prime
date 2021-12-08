@@ -30,7 +30,7 @@
         :content="this.dataVisualizer.toPresidentsReligionVote()"
       />
       <ReligionVoteIntention
-        target="Presidência"
+        target="Governador"
         :content="this.dataVisualizer.toGovernorsReligionVote()"
       />
       <EthnicityVoteIntention
@@ -46,7 +46,7 @@
         :content="this.dataVisualizer.toPresidentsRegionVote()"
       />
       <RegionVoteIntention
-        target="Presidência"
+        target="Governador"
         :content="this.dataVisualizer.toGovernorsRegionVote()"
       />
       <ScholarityVoteIntention
@@ -54,7 +54,7 @@
         :content="this.dataVisualizer.toPresidentsScholarityVote()"
       />
       <ScholarityVoteIntention
-        target="Presidência"
+        target="Governador"
         :content="this.dataVisualizer.toGovernorsScholarityVote()"
       />
       <SexVoteIntention
@@ -63,7 +63,7 @@
         :candidates="this.dataVisualizer.toPresidentsName()"
       />
       <SexVoteIntention
-        target="Presidência"
+        target="Governador"
         :content="this.dataVisualizer.toGovernorsSexVote()"
         :candidates="this.dataVisualizer.toGovernorsName()"
       />
@@ -72,7 +72,7 @@
         :content="this.dataVisualizer.toPresidentsIncomeVote()"
       />
       <IncomeVoteIntention
-        target="Presidência"
+        target="Governador"
         :content="this.dataVisualizer.toGovernorsIncomeVote()"
       />
     </div>
