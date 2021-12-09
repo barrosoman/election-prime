@@ -16,7 +16,7 @@
         />
       </svg>
       <h1>
-        Maximize sua chance de <span style="color: #519259">vitória</span>.
+        Maximize sua chance de <span style="color: #7a7fdc">vitória</span>.
       </h1>
       <h4>Conosco você saberá onde investir em sua corrida eleitoral.</h4>
       <h4>Faremos com que você seja o primeiro.</h4>
