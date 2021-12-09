@@ -120,6 +120,23 @@ export class DataGenerator {
   }
 
   /**
+   * Generates a CSV file data containing the generated information
+   *
+   * @param amount the amount of votes to be generated
+   */
+  generateToFileData(amount: number): string {
+    let dataString = ''
+    const dataInfoArray: DataInfo[] = this.generate(amount)
+
+    dataInfoArray.forEach(
+      (dataInfo) =>
+        (dataString += `${dataInfo.age};${dataInfo.religion};${dataInfo.ethnicity};${dataInfo.region};${dataInfo.scholarity};${dataInfo.sex};${dataInfo.income};${dataInfo.ivp};${dataInfo.ivg}\n`)
+    )
+
+    return dataString
+  }
+
+  /**
    * Returns a random generated {@link DataInfo}.
    * @returns a random generated {@link DataInfo}
    */
