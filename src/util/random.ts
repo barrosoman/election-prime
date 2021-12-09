@@ -36,37 +36,6 @@ export function randomInt(min?: number, max?: number): number {
 }
 
 /**
- * Returns a pseurandom Gaussian distributed number with mean {@code 0.0}
- * and standard deviation {@code 1.0} such that a number in the interval
- * [min, max] will be selected. Otheriwse, if the bounds are not both
- * set then the interval is [0, 1].
- *
- * This code is provided by the Java JDK Random#nextGaussian() method.
- * https://github.com/openjdk/jdk/blob/master/src/java.base/share/classes/java/util/Random.java
- *
- * @param {Number} min the minimum bound
- * @param {Number} max the maximum bound
- *
- * @returns a pseurandom Gaussian distributed number
- */
-export function randomGaussian(min?: number, max?: number): number {
-  if (!min || !max) {
-    let u: number
-    let v: number
-    let s: number
-
-    do {
-      u = 2 * Math.random() - 1
-      v = 2 * Math.random() - 1
-      s = u * u + v * v
-    } while (s >= 1 || s == 0)
-
-    const multiplier: number = Math.sqrt((-2 * Math.log(s)) / s)
-    return u * multiplier
-  } else return randomInterval(min, max, randomGaussian)
-}
-
-/**
  * Returns a random selected element from the {@code array}.
  *
  * @param array the array
@@ -76,5 +45,5 @@ export function randomGaussian(min?: number, max?: number): number {
  */
 export function randomSelect<T>(array: T[], random?: () => number): T {
   if (!random) random = Math.random
-  return array[array.length * random()]
+  return array[Math.floor(array.length * random())]
 }
