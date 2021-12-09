@@ -1,7 +1,7 @@
 <template>
   <Page name="Insights">
     <Card
-      class="mt-3"
+      style="margin-bottom: 1.5rem"
       title="Primeiro de tudo. Quem é você como candidato?"
       subtitle="Selecione abaixo o nome do candidato que deseja receber os insights"
     >

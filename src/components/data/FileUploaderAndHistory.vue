@@ -1,6 +1,6 @@
 <template>
   <Card
-    class="mt-3"
+    style="margin-bottom: 1.5rem"
     title="Envie seus dados"
     subtitle="Abaixo você pode inserir os dados que serão analisados e a formatação dos dados de entrada pode ser visualizado no fim da página."
   >
