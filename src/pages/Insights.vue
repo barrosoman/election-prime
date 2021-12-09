@@ -1,6 +1,7 @@
 <template>
   <Page name="Insights">
     <Card
+      class="mt-3"
       title="Primeiro de tudo. Quem é você como candidato?"
       subtitle="Selecione abaixo o nome do candidato que deseja receber os insights"
     >
@@ -37,6 +38,7 @@
       />
     </Card>
     <Card
+      class="mt-3"
       title="Insights com relação à intenção total de votos"
       subtitle="Consulte seus resultados com relação à intenção total de votos"
     >
@@ -148,5 +150,10 @@ export default defineComponent({
   background: #dd4a48;
   position: relative;
   animation: trim 0.25s ease-out;
+}
+
+.mt-3 {
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
 }
 </style>
