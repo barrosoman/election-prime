@@ -392,12 +392,12 @@ export default defineComponent({
       else mostIncomeVotesMessage = mostIncomeVotes
 
       if (leastIncomeVotes === '<=2') leastIncomeVotesMessage = 'até 2'
-      else if (leastIncomeVotesMessage === '>10')
+      else if (leastIncomeVotes === '>10')
         leastIncomeVotesMessage = 'mais de 10'
       else leastIncomeVotesMessage = leastIncomeVotes
 
       this.mostIncomeVotesMessage = `A população com renda salarial de ${mostIncomeVotesMessage} salários mínimos colaboram com sua campanha!`
-      this.leastIncomeVotesMessage = `Precisamos rever as dificuldades que a população com renda salarial de ${leastIncomeVotes} salários mínimos.`
+      this.leastIncomeVotesMessage = `Precisamos rever as dificuldades que a população com renda salarial de ${leastIncomeVotesMessage} salários mínimos.`
     }
   }
 })
