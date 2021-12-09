@@ -754,7 +754,7 @@ export class DataVisualizer {
   /**
    * Returns the array of {@link DataInfo} that has been visualized
    * by the {@link DataVisualizer}.
-   * 
+   *
    * @returns the array of {@link DataInfo} that has been visualized
    *          by the {@link DataVisualizer}
    */

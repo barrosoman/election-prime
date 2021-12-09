@@ -8,7 +8,9 @@
       class="button-link"
       >{{ content }}</router-link
     >
-    <a v-else class="button-link" v-on:click.prevent>{{ content }} </a>
+    <a v-else class="button-link" @click="$emit('clicked')" @:click.prevent
+      >{{ content }}
+    </a>
   </div>
 </template>
 
@@ -29,7 +31,8 @@ export default defineComponent({
       type: String,
       required: false
     }
-  }
+  },
+  emits: ['clicked']
 })
 </script>
 

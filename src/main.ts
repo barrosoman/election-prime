@@ -8,6 +8,7 @@ import Dashboard from '@/pages/Dashboard.vue'
 import Data from '@/pages/Data.vue'
 import PageNotFound from '@/pages/PageNotFound.vue'
 import Home from '@/pages/Home.vue'
+import Insights from '@/pages/Insights.vue'
 
 const routes = [
   {
@@ -15,7 +16,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/Home',
+    path: '/home',
     component: Home
   },
   {
@@ -25,6 +26,10 @@ const routes = [
   {
     path: '/data',
     component: Data
+  },
+  {
+    path: '/insights',
+    component: Insights
   },
   {
     path: '/:catchAll(.*)',
