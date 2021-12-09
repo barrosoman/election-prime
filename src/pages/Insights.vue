@@ -57,6 +57,78 @@
         <span class="votes-insight">{{ leastGroupAgeMessage }}</span>
       </div>
     </Card>
+    <Card
+      v-if="showInsights"
+      class="mt-3"
+      title="Insights com relação à intenção de votos por Religião"
+      subtitle="Consulte seus resultados com relação à intenção de votos por religião"
+    >
+      {{ calculateReligionVotesInsights() }}
+      <div class="votes-container">
+        <span class="votes-insight">{{ mostReligionVotesMessage }}</span>
+        <span class="votes-insight">{{ leastReligionVotesMessage }}</span>
+      </div>
+    </Card>
+    <Card
+      v-if="showInsights"
+      class="mt-3"
+      title="Insights com relação à intenção de votos por Etnia"
+      subtitle="Consulte seus resultados com relação à intenção de votos por etnia"
+    >
+      {{ calculateEthnicityVotesInsights() }}
+      <div class="votes-container">
+        <span class="votes-insight">{{ mostEthnicityVotesMessage }}</span>
+        <span class="votes-insight">{{ leastEthnicityVotesMessage }}</span>
+      </div>
+    </Card>
+    <Card
+      v-if="showInsights"
+      class="mt-3"
+      title="Insights com relação à intenção de votos por Região"
+      subtitle="Consulte seus resultados com relação à intenção de votos por região"
+    >
+      {{ calculateRegionVotesInsights() }}
+      <div class="votes-container">
+        <span class="votes-insight">{{ mostRegionVotesMessage }}</span>
+        <span class="votes-insight">{{ leastRegionVotesMessage }}</span>
+      </div>
+    </Card>
+    <Card
+      v-if="showInsights"
+      class="mt-3"
+      title="Insights com relação à intenção de votos por Escolaridade"
+      subtitle="Consulte seus resultados com relação à intenção de votos por escolaridade"
+    >
+      {{ calculateScholarityVotesInsights() }}
+      <div class="votes-container">
+        <span class="votes-insight">{{ mostScholarityVotesMessage }}</span>
+        <span class="votes-insight">{{ leastScholarityVotesMessage }}</span>
+      </div>
+    </Card>
+    <Card
+      v-if="showInsights"
+      class="mt-3"
+      title="Insights com relação à intenção de votos por Sexo"
+      subtitle="Consulte seus resultados com relação à intenção de votos por sexo"
+    >
+      {{ calculateSexVotesInsights() }}
+      <div class="votes-container">
+        <span class="votes-insight">{{ mostSexVotesMessage }}</span>
+        <span class="votes-insight">{{ leastSexVotesMessage }}</span>
+      </div>
+    </Card>
+    <Card
+      v-if="showInsights"
+      class="mt-3"
+      title="Insights com relação à intenção de votos por Renda Salarial"
+      subtitle="Consulte seus resultados com relação à intenção de votos por renda salarial"
+    >
+      {{ calculateIncomeVotesInsight() }}
+      <div class="votes-container">
+        <span class="votes-insight">{{ mostIncomeVotesMessage }}</span>
+        <span class="votes-insight">{{ leastIncomeVotesMessage }}</span>
+      </div>
+    </Card>
   </Page>
 </template>
 
@@ -85,7 +157,19 @@ export default defineComponent({
       unrecgonizedCandidate: false,
       showInsights: false,
       mostGroupAgeMessage: '',
-      leastGroupAgeMessage: ''
+      leastGroupAgeMessage: '',
+      mostReligionVotesMessage: '',
+      leastReligionVotesMessage: '',
+      mostEthnicityVotesMessage: '',
+      leastEthnicityVotesMessage: '',
+      mostRegionVotesMessage: '',
+      leastRegionVotesMessage: '',
+      mostScholarityVotesMessage: '',
+      leastScholarityVotesMessage: '',
+      mostSexVotesMessage: '',
+      leastSexVotesMessage: '',
+      mostIncomeVotesMessage: '',
+      leastIncomeVotesMessage: ''
     }
   },
   mounted() {
@@ -137,8 +221,7 @@ export default defineComponent({
       return `Você ficou em #${position} nessa pesquisa. ${message}`
     },
     /**
-     * This method returns a message that informs the age group
-     * that most voted in the user
+     * This method calculates the insights with relation to the age groups
      */
     calculateAgeVotesInsight(): void {
       if (this.dataInsighter === undefined) throw 'data insighter undefined'
@@ -197,6 +280,124 @@ export default defineComponent({
 
       this.mostGroupAgeMessage = mostGroupAgeMessage
       this.leastGroupAgeMessage = leastGroupAgeMessage
+    },
+    /**
+     * This method informs the insights of the vote with relation to religion.
+     */
+    calculateReligionVotesInsights(): void {
+      if (this.dataInsighter === undefined) throw 'data insighter undefined'
+
+      const [mostReligionVotes, leastReligionVotes] =
+        this.dataInsighter.getReligionVotesMostAndLeast()
+
+      let mostReligionVotesInfo = ''
+      let leastReligionVotesInfo = ''
+
+      if (mostReligionVotes !== 'Sem Religião')
+        mostReligionVotesInfo = mostReligionVotes.toLowerCase() + 's'
+      else mostReligionVotesInfo = mostReligionVotes
+
+      if (leastReligionVotes !== 'Sem Religião')
+        leastReligionVotesInfo = leastReligionVotes.toLowerCase() + 's'
+      else leastReligionVotesInfo = leastReligionVotes
+
+      this.mostReligionVotesMessage = `Os ${mostReligionVotesInfo} estão te apoiando imensamente!`
+      this.leastReligionVotesMessage = `Devemos nos focar nas necessidades dos ${leastReligionVotesInfo}.`
+    },
+    /**
+     * This method informs the insights of the vote with relation to ethnicity.
+     */
+    calculateEthnicityVotesInsights(): void {
+      if (this.dataInsighter === undefined) throw 'data insighter undefined'
+
+      const [mostEthnicityVotes, leastEthnicityVotes] =
+        this.dataInsighter.getEthnicityVotesMostAndLeast()
+
+      let mostEthnicityVotesInfo = ''
+      let leastEthnicityVotesInfo = ''
+
+      if (mostEthnicityVotes !== 'Indígena')
+        mostEthnicityVotesInfo =
+          mostEthnicityVotes
+            .toLowerCase()
+            .substring(0, mostEthnicityVotes.length - 1) + 'a'
+      else mostEthnicityVotesInfo = mostEthnicityVotes.toLowerCase()
+
+      if (leastEthnicityVotes !== 'Indígena')
+        leastEthnicityVotesInfo =
+          leastEthnicityVotes
+            .toLowerCase()
+            .substring(0, leastEthnicityVotes.length - 1) + 'a'
+      else leastEthnicityVotesInfo = leastEthnicityVotes.toLowerCase()
+
+      this.mostEthnicityVotesMessage = `A população ${mostEthnicityVotesInfo} é a que mais te apoia nessa corrida eleitoral!`
+      this.leastEthnicityVotesMessage = `A população ${leastEthnicityVotesInfo} mostram que não compatibilizam com sua campanha!`
+    },
+    /**
+     * This method informs the insights of the vote with relation to region.
+     */
+    calculateRegionVotesInsights(): void {
+      if (this.dataInsighter === undefined) throw 'data insighter undefined'
+
+      const [mostRegionVotes, leastRegionVotes] =
+        this.dataInsighter.getRegionVotesMostAndLeast()
+
+      this.mostRegionVotesMessage = `A região ${mostRegionVotes} mostra ser uma grande aliada à sua vitória!`
+      this.leastRegionVotesMessage = `Devemos focar nas necessidades da região ${leastRegionVotes} que não apoia fortemente sua campanha!`
+    },
+    /**
+     * This method informs the insights of the vote with relation to scholarity.
+     */
+    calculateScholarityVotesInsights(): void {
+      if (this.dataInsighter === undefined) throw 'data insighter undefined'
+
+      const [mostScholarityVotes, leastScholarityVotes] =
+        this.dataInsighter.getScholarityVotesMostAndLeast()
+      const withMostScholarity =
+        mostScholarityVotes === 'Sem Escolaridade' ? '' : 'com'
+      const withLeastScholarity =
+        leastScholarityVotes === 'Sem Escolaridade' ? '' : 'com'
+
+      this.mostScholarityVotesMessage = `Os eleitores ${withMostScholarity} ${mostScholarityVotes} apoiam sua campanha!`
+      this.leastScholarityVotesMessage = `Indispensável rever as necessidades dos eleitores ${withLeastScholarity} ${leastScholarityVotes} que parecem não simpartizar com sua corrida eleitoral!`
+    },
+    /**
+     * This method informs the insights of the vote with relation to sex.
+     */
+    calculateSexVotesInsights(): void {
+      if (this.dataInsighter === undefined) throw 'data insighter undefined'
+
+      const [mostSexVotes, leastSexVotes] =
+        this.dataInsighter.getSexVotesMostAndLeast()
+      const mostSexVotesInfo = mostSexVotes === 'M' ? 'Masculino' : 'Feminino'
+      const leastSexVotesInfo = leastSexVotes === 'M' ? 'Masculino' : 'Feminino'
+
+      this.mostSexVotesMessage = `Os eleitores do sexo ${mostSexVotesInfo} contribuem com sua jornada!`
+      this.leastSexVotesMessage = `Poxa, devemos focar nas dificuldades da população do sexo ${leastSexVotesInfo}.`
+    },
+    /**
+     * This method calculates the insights with relation to the income
+     */
+    calculateIncomeVotesInsight(): void {
+      if (this.dataInsighter === undefined) throw 'data insighter undefined'
+
+      let mostIncomeVotesMessage = ''
+      let leastIncomeVotesMessage = ''
+
+      const [mostIncomeVotes, leastIncomeVotes] =
+        this.dataInsighter.getIncomeVotesMostAndLeast()
+
+      if (mostIncomeVotes === '<=2') mostIncomeVotesMessage = 'até 2'
+      else if (mostIncomeVotes === '>10') mostIncomeVotesMessage = 'mais de 10'
+      else mostIncomeVotesMessage = mostIncomeVotes
+
+      if (leastIncomeVotes === '<=2') leastIncomeVotesMessage = 'até 2'
+      else if (leastIncomeVotesMessage === '>10')
+        leastIncomeVotesMessage = 'mais de 10'
+      else leastIncomeVotesMessage = leastIncomeVotes
+
+      this.mostIncomeVotesMessage = `A população com renda salarial de ${mostIncomeVotesMessage} salários mínimos colaboram com sua campanha!`
+      this.leastIncomeVotesMessage = `Precisamos rever as dificuldades que a população com renda salarial de ${leastIncomeVotes} salários mínimos.`
     }
   }
 })
