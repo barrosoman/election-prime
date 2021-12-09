@@ -9,6 +9,7 @@ import Data from '@/pages/Data.vue'
 import PageNotFound from '@/pages/PageNotFound.vue'
 import Home from '@/pages/Home.vue'
 import Insights from '@/pages/Insights.vue'
+import DataGenerator from '@/pages/DataGenerator.vue'
 
 const routes = [
   {
@@ -30,6 +31,10 @@ const routes = [
   {
     path: '/insights',
     component: Insights
+  },
+  {
+    path: '/datagen',
+    component: DataGenerator
   },
   {
     path: '/:catchAll(.*)',
