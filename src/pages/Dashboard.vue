@@ -156,5 +156,6 @@ export default defineComponent({
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 5rem;
+  margin-bottom: 1.5rem;
 }
 </style>
