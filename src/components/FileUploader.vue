@@ -24,7 +24,7 @@
             ></path>
           </svg>
         </div>
-        <h4>Solte seus arquivos aqui ou clique para carregar</h4>
+        <h4>Clique para carregar seus arquivos!</h4>
       </div>
     </div>
   </label>
