@@ -7,7 +7,7 @@ import {
   Sex
 } from '@/models/DataInfo'
 
-import { randomGaussian, randomInt, randomSelect } from '@/util/random'
+import { randomInt, randomSelect } from '@/util/random'
 
 /**
  * The {@link DataGenerator} class handles the randomized generation
@@ -146,7 +146,7 @@ export class DataGenerator {
    *          the defined interval.
    */
   private randomAge(): number {
-    return randomGaussian(DataGenerator.MINIMUM_AGE, DataGenerator.MAXIMUM_AGE)
+    return randomInt(DataGenerator.MINIMUM_AGE, DataGenerator.MAXIMUM_AGE)
   }
 
   /**
