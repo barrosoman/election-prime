@@ -1,20 +1,20 @@
 <template>
   <Page name="Início">
+    <svg
+      class="wave"
+      width="1920"
+      height="644"
+      viewBox="0 0 1920 644"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1920 0C1051.1 21.27 659.75 631.633 1.70447 0C0.0086013 120.967 -1.08056 178.394 1.70447 644H1920V0Z"
+        fill="#5156BE"
+        fill-opacity="0.05"
+      />
+    </svg>
     <div class="content">
-      <svg
-        class="wave"
-        width="1920"
-        height="644"
-        viewBox="0 0 1920 644"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M1920 0C1051.1 21.27 659.75 631.633 1.70447 0C0.0086013 120.967 -1.08056 178.394 1.70447 644H1920V0Z"
-          fill="#5156BE"
-          fill-opacity="0.05"
-        />
-      </svg>
       <h1>
         Maximize sua chance de <span style="color: #7a7fdc">vitória</span>.
       </h1>
@@ -70,6 +70,7 @@ export default defineComponent({
 .wave {
   position: absolute;
   width: 100%;
+  left: 0;
   top: 128px;
   z-index: -1;
 }
