@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="navbar-header">
-      <div class="logo">Grupo RRJ</div>
+      <div class="logo">Election Prime</div>
       <Date class="time" />
     </div>
   </header>
