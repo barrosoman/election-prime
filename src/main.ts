@@ -14,37 +14,71 @@ import DataGenerator from '@/pages/DataGenerator.vue'
 const routes = [
   {
     path: '/',
-    component: Home
+    component: Home,
+    meta: {
+      title: 'Início - Election Prime'
+    }
   },
   {
     path: '/home',
-    component: Home
+    component: Home,
+    meta: {
+      title: 'Início - Election Prime'
+    }
   },
   {
     path: '/graph',
-    component: Dashboard
+    component: Dashboard,
+    meta: {
+      title: 'Infográficos - Election Prime'
+    }
   },
   {
     path: '/data',
-    component: Data
+    component: Data,
+    meta: {
+      title: 'Dados - Election Prime'
+    }
   },
   {
     path: '/insights',
-    component: Insights
+    component: Insights,
+    meta: {
+      title: 'Insights - Election Prime'
+    }
   },
   {
     path: '/datagen',
-    component: DataGenerator
+    component: DataGenerator,
+    meta: {
+      title: 'Gerador de Dados - Election Prime'
+    }
   },
   {
     path: '/:catchAll(.*)',
-    component: PageNotFound
+    component: PageNotFound,
+    meta: {
+      title: 'Página Não Encontrada - Election Prime'
+    }
   }
 ]
 
 const router = VueRouter.createRouter({
   history: VueRouter.createWebHistory(),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const componentWithTitle = to.matched
+    .slice()
+    .reverse()
+    .find((r) => r.meta && r.meta.title)
+
+  if (componentWithTitle)
+    document.title = componentWithTitle.meta.title as string
+
+  // Do not remove that! Otherwise the page will not render.
+  next()
 })
 
 const app = Vue.createApp(App)
