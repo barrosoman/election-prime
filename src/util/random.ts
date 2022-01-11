@@ -36,6 +36,32 @@ export function randomInt(min?: number, max?: number): number {
 }
 
 /**
+ * Returns a normally distributed random number with the specified
+ * mean and standard deviation.
+ *
+ * @param {Number} mean the mean of the normal distribution
+ * @param {Number} standardDeviation the standard deviation of the normal distribution
+ *
+ * @returns {Number} a normally distributed random number
+ */
+export function randomGaussian(
+  mean: number,
+  standardDeviation: number
+): number {
+  let u: number
+  let v: number
+  let r: number
+
+  do {
+    u = Math.random() * 2.0 - 1
+    v = Math.random() * 2.0 - 1
+    r = u * u + v * v
+  } while (r === 0 || r >= 1)
+
+  return mean + standardDeviation * v * Math.sqrt((-2.0 * Math.log(r)) / r)
+}
+
+/**
  * Returns a random selected element from the {@code array}.
  *
  * @param array the array
