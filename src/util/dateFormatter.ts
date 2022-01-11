@@ -56,10 +56,10 @@ export function formatSimpleHour(hours: number, minutes: number): string {
 export function formatSimpleDate(dateNumber: number): string {
   const date = new Date(dateNumber)
   const paddedDate = (date.getDate() < 10 ? '0' : '') + date.getDate()
+  const paddedMonth =
+    (date.getMonth() + 1 < 10 ? '0' : '') + `${date.getMonth() + 1}`
   const paddedHours = (date.getHours() < 10 ? '0' : '') + date.getHours()
   const paddedMinutes = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes()
 
-  return `${paddedDate}/${
-    date.getMonth() + 1
-  }/${date.getFullYear()} ${paddedHours}:${paddedMinutes}`
+  return `${paddedDate}/${paddedMonth}/${date.getFullYear()} ${paddedHours}:${paddedMinutes}`
 }
