@@ -199,6 +199,31 @@ export class DataStatistics {
   }
 
   /**
+   * Returns the kurtosis of a sample.
+   *
+   * @param {Number[]} sample the sample
+   * @param {Number} [mean] the mean of the sample
+   *
+   * @returns the kurtosis of the sample.
+   */
+  static kurtosis(sample: number[], mean?: number): number {
+    if (!mean) mean = this.mean(sample)
+
+    let numAcc = 0
+    let denAcc = 0
+
+    for (const sampleValue of sample) {
+      const sMeanDeviation = Math.pow(sampleValue - mean, 2)
+      const fMeanDeviation = sMeanDeviation * sMeanDeviation
+
+      numAcc += fMeanDeviation
+      denAcc += sMeanDeviation
+    }
+
+    return (sample.length * numAcc) / Math.pow(denAcc, 2) - 3.0
+  }
+
+  /**
    * @internal
    */
   static sortingComparator(a: number, b: number): number {
