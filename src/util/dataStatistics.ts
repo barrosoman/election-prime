@@ -7,7 +7,7 @@ export class DataStatistics {
    * and dividing that result by n (the amount of numbers in the sample).
    *
    * @param {Number[]} sample the sample
-   * @param {Boolean} sorted if it is true represents that the sample is
+   * @param {Boolean} [sorted] if it is true represents that the sample is
    *                         already sorted. Otherwise, the method will
    *                         sort the sample.
    *
@@ -30,7 +30,7 @@ export class DataStatistics {
    * the central number.
    *
    * @param {Number[]} sample the sample
-   * @param {Boolean} sorted if it is true represents that the sample is
+   * @param {Boolean} [sorted] if it is true represents that the sample is
    *                         already sorted. Otherwise, the method will
    *                         sort the sample.
    *
@@ -85,7 +85,7 @@ export class DataStatistics {
    * the sample is the median of the upper half of the sample.
    *
    * @param {Number} sample the sample
-   * @param {Boolean} sorted if it is true represents that the sample is
+   * @param {Boolean} [sorted] if it is true represents that the sample is
    *                         already sorted. Otherwise, the method will
    *                         sort the sample.
    *
@@ -122,7 +122,7 @@ export class DataStatistics {
    * value of the deviation of the sample values from the sample mean.
    *
    * @param {Number[]} sample the sample
-   * @param {Boolean} sorted if it is true represents that the sample is
+   * @param {Boolean} [sorted] if it is true represents that the sample is
    *                         already sorted. Otherwise, the method will
    *                         sort the sample.
    *
@@ -181,8 +181,8 @@ export class DataStatistics {
    * method will calculate those values from the sample.
    *
    * @param {Number[]} sample the sample
-   * @param {Number} min the minimum value of that sample
-   * @param {Number} max the maximum value of that sample
+   * @param {Number} [min] the minimum value of that sample
+   * @param {Number} [max] the maximum value of that sample
    *
    * @returns the range of that sample
    */
