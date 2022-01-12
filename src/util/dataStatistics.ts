@@ -1,4 +1,4 @@
-export default class DataStatistics {
+export class DataStatistics {
   /**
    * Returns the mean of a sample.
    *
