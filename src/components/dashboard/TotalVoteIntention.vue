@@ -45,7 +45,10 @@
             <td>{{ quartile[1] - quartile[0] }}</td>
           </tr>
           <tr>
-            <th>Assimetria</th>
+            <th>
+              Assimetria
+              <span style="font-weight: 400; opacity: 0.8">(Pearson)</span>
+            </th>
             <td>
               {{ ((mean - median) / standardDeviation).toFixed(2) }}
             </td>
