@@ -7,14 +7,15 @@ export class DataStatistics {
    * and dividing that result by n (the amount of numbers in the sample).
    *
    * @param {Number[]} sample the sample
+   * @param {Boolean} sorted if it is true represents that the sample is
+   *                         already sorted. Otherwise, the method will
+   *                         sort the sample.
    *
    * @returns {Number} the mean of a sample
    */
-  static mean(sample: number[]): number {
-    return (
-      sample.sort(this.sortingComparator).reduce((prev, curr) => prev + curr) /
-      sample.length
-    )
+  static mean(sample: number[], sorted?: boolean): number {
+    if (!sorted) sample.sort(this.sortingComparator)
+    return sample.reduce((prev, curr) => prev + curr) / sample.length
   }
 
   /**
@@ -70,6 +71,9 @@ export class DataStatistics {
     for (const sampleValue of sample)
       if (countingMap[mode] < countingMap[sampleValue]) mode = sampleValue
 
+    /* This condition inform that the sample does not has a mode */
+    if (mode === sample[0] && countingMap[mode] === 1) return NaN
+
     return mode
   }
 
@@ -81,12 +85,15 @@ export class DataStatistics {
    * the sample is the median of the upper half of the sample.
    *
    * @param {Number} sample the sample
+   * @param {Boolean} sorted if it is true represents that the sample is
+   *                         already sorted. Otherwise, the method will
+   *                         sort the sample.
    *
    * @returns the lower and upper quartile of the sample.
    */
-  static quartile(sample: number[]): [number, number] {
-    /* Sort the sample */
-    sample.sort(this.sortingComparator)
+  static quartile(sample: number[], sorted?: boolean): [number, number] {
+    /* Sort the sample if it is not sorted */
+    if (!sorted) sample.sort(this.sortingComparator)
 
     const n = sample.length
 
@@ -115,18 +122,22 @@ export class DataStatistics {
    * value of the deviation of the sample values from the sample mean.
    *
    * @param {Number[]} sample the sample
+   * @param {Boolean} sorted if it is true represents that the sample is
+   *                         already sorted. Otherwise, the method will
+   *                         sort the sample.
    *
    * @returns {Number} the standard deviation of a sample
    */
-  static standardDeviation(sample: number[]): number {
+  static standardDeviation(sample: number[], sorted?: boolean): number {
+    /* Sort the sample if it is not sorted */
+    if (!sorted) sample.sort(this.sortingComparator)
+
     const n = sample.length
     const sxx =
-      sample
-        .sort(this.sortingComparator)
-        .reduce(
-          (prev, curr, index) =>
-            (index === 1 ? Math.pow(prev, 2) : prev) + Math.pow(curr, 2)
-        ) -
+      sample.reduce(
+        (prev, curr, index) =>
+          (index === 1 ? Math.pow(prev, 2) : prev) + Math.pow(curr, 2)
+      ) -
       n * Math.pow(this.mean(sample), 2)
     return Math.sqrt(sxx / (n - 1))
   }
