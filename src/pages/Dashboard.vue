@@ -19,42 +19,52 @@
       />
       <AgeGroupVoteIntention
         target="Presidência"
+        class="graph-one-line"
         :content="this.dataVisualizer.toPresidentsAgeGroupVote()"
       />
       <AgeGroupVoteIntention
         target="Governador"
+        class="graph-one-line"
         :content="this.dataVisualizer.toGovernorsAgeGroupVote()"
       />
       <ReligionVoteIntention
         target="Presidência"
+        class="graph-one-line"
         :content="this.dataVisualizer.toPresidentsReligionVote()"
       />
       <ReligionVoteIntention
         target="Governador"
+        class="graph-one-line"
         :content="this.dataVisualizer.toGovernorsReligionVote()"
       />
       <EthnicityVoteIntention
         target="Presidência"
+        class="graph-one-line"
         :content="this.dataVisualizer.toPresidentsEthnicityVote()"
       />
       <EthnicityVoteIntention
         target="Governador"
+        class="graph-one-line"
         :content="this.dataVisualizer.toGovernorsEthnicityVote()"
       />
       <RegionVoteIntention
         target="Presidência"
+        class="graph-one-line"
         :content="this.dataVisualizer.toPresidentsRegionVote()"
       />
       <RegionVoteIntention
         target="Governador"
+        class="graph-one-line"
         :content="this.dataVisualizer.toGovernorsRegionVote()"
       />
       <ScholarityVoteIntention
         target="Presidência"
+        class="graph-one-line"
         :content="this.dataVisualizer.toPresidentsScholarityVote()"
       />
       <ScholarityVoteIntention
         target="Governador"
+        class="graph-one-line"
         :content="this.dataVisualizer.toGovernorsScholarityVote()"
       />
       <SexVoteIntention
@@ -69,10 +79,12 @@
       />
       <IncomeVoteIntention
         target="Presidência"
+        class="graph-one-line"
         :content="this.dataVisualizer.toPresidentsIncomeVote()"
       />
       <IncomeVoteIntention
         target="Governador"
+        class="graph-one-line"
         :content="this.dataVisualizer.toGovernorsIncomeVote()"
       />
     </div>
@@ -157,5 +169,10 @@ export default defineComponent({
   grid-template-columns: 1fr 1fr;
   grid-gap: 5rem;
   margin-bottom: 1.5rem;
+}
+
+.graph-one-line {
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
 </style>
