@@ -60,7 +60,7 @@ export class DataStatistics {
    * @returns the mode of the sample
    */
   static mode(sample: number[]): number {
-    const countingMap: any = {}
+    const countingMap: any = {} // eslint-disable-line
 
     for (const sampleValue of sample)
       countingMap[sampleValue] = countingMap[sampleValue] + 1 || 1
