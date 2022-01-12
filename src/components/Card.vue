@@ -12,6 +12,9 @@
     <div class="card-body">
       <slot />
     </div>
+    <div class="card-footer">
+      <slot name="footer" />
+    </div>
   </div>
 </template>
 
@@ -46,6 +49,12 @@ export default defineComponent({
   margin-bottom: 0;
   background-color: #fff;
   border-bottom: 1px solid #e9e9ef;
+}
+
+.card-footer {
+  padding: 1.25rem;
+  margin-bottom: 0;
+  background-color: #fff;
 }
 
 .card-body {
