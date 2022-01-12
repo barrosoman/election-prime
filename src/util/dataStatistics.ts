@@ -1,4 +1,57 @@
+/**
+ * The statistics resume is a object interface that contains
+ * statistics measures about a sample.
+ *
+ * That resume contains the following measures.
+ *  - mean, median, mode, standardDeviation, lowerQuartile,
+ *    upperQuartile, asymmetry, kurtosis and range.
+ *
+ * From the values listed above it is possible to calculate
+ * more measures.
+ */
+export interface StatisticsResume {
+  readonly mean: number
+  readonly median: number
+  readonly mode: number
+  readonly standardDeviation: number
+  readonly lowerQuartile: number
+  readonly upperQuartile: number
+  readonly asymmetry: number
+  readonly kurtosis: number
+  readonly range: number
+}
+
 export class DataStatistics {
+  /**
+   * Summarize the required statistics measures from {@link StatisticsResume}
+   * object interface from the sample.
+   *
+   * @param {Number[]} sample the sample to be summarized to
+   *
+   * @returns a {@link StatisticsResume}
+   */
+  static summarize(sample: number[]): StatisticsResume {
+    /* Sort the sample before calculate the measures */
+    sample.sort(this.sortingComparator)
+
+    const mean = this.mean(sample, true)
+    const median = this.median(sample, true)
+    const standardDeviation = this.standardDeviation(sample, true)
+    const [Q1, Q3] = this.quartile(sample, true)
+
+    return {
+      mean,
+      median,
+      mode: this.mode(sample),
+      standardDeviation,
+      lowerQuartile: Q1,
+      upperQuartile: Q3,
+      asymmetry: this.asymmetry(sample, mean, median, standardDeviation),
+      kurtosis: this.kurtosis(sample, mean),
+      range: this.range(sample, sample[0], sample[sample.length - 1])
+    }
+  }
+
   /**
    * Returns the mean of a sample.
    *
