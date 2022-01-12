@@ -40,93 +40,90 @@
     <Card
       v-if="showInsights"
       class="mt-3"
-      title="Insights com relação à intenção total de votos"
-      subtitle="Consulte seus resultados com relação à intenção total de votos"
+      title="Insights dos dados coletado"
+      subtitle="Abaixo será apresentado os insights sobre o total de votos em geral, por faixa etária, religião, etnia, região, escolaridade, sexo e renda salarial."
     >
-      <span class="votes-insight">{{ calculateTotalVotesInsight() }}</span>
-    </Card>
-    <Card
-      v-if="showInsights"
-      class="mt-3"
-      title="Insights com relação à intenção de votos por Faixa Etária"
-      subtitle="Consulte seus resultados com relação à intenção de votos por faixa etária"
-    >
-      {{ calculateAgeVotesInsight() }}
-      <div class="votes-container">
-        <span class="votes-insight">{{ mostGroupAgeMessage }}</span>
-        <span class="votes-insight">{{ leastGroupAgeMessage }}</span>
-      </div>
-    </Card>
-    <Card
-      v-if="showInsights"
-      class="mt-3"
-      title="Insights com relação à intenção de votos por Religião"
-      subtitle="Consulte seus resultados com relação à intenção de votos por religião"
-    >
-      {{ calculateReligionVotesInsights() }}
-      <div class="votes-container">
-        <span class="votes-insight">{{ mostReligionVotesMessage }}</span>
-        <span class="votes-insight">{{ leastReligionVotesMessage }}</span>
-      </div>
-    </Card>
-    <Card
-      v-if="showInsights"
-      class="mt-3"
-      title="Insights com relação à intenção de votos por Etnia"
-      subtitle="Consulte seus resultados com relação à intenção de votos por etnia"
-    >
-      {{ calculateEthnicityVotesInsights() }}
-      <div class="votes-container">
-        <span class="votes-insight">{{ mostEthnicityVotesMessage }}</span>
-        <span class="votes-insight">{{ leastEthnicityVotesMessage }}</span>
-      </div>
-    </Card>
-    <Card
-      v-if="showInsights"
-      class="mt-3"
-      title="Insights com relação à intenção de votos por Região"
-      subtitle="Consulte seus resultados com relação à intenção de votos por região"
-    >
-      {{ calculateRegionVotesInsights() }}
-      <div class="votes-container">
-        <span class="votes-insight">{{ mostRegionVotesMessage }}</span>
-        <span class="votes-insight">{{ leastRegionVotesMessage }}</span>
-      </div>
-    </Card>
-    <Card
-      v-if="showInsights"
-      class="mt-3"
-      title="Insights com relação à intenção de votos por Escolaridade"
-      subtitle="Consulte seus resultados com relação à intenção de votos por escolaridade"
-    >
-      {{ calculateScholarityVotesInsights() }}
-      <div class="votes-container">
-        <span class="votes-insight">{{ mostScholarityVotesMessage }}</span>
-        <span class="votes-insight">{{ leastScholarityVotesMessage }}</span>
-      </div>
-    </Card>
-    <Card
-      v-if="showInsights"
-      class="mt-3"
-      title="Insights com relação à intenção de votos por Sexo"
-      subtitle="Consulte seus resultados com relação à intenção de votos por sexo"
-    >
-      {{ calculateSexVotesInsights() }}
-      <div class="votes-container">
-        <span class="votes-insight">{{ mostSexVotesMessage }}</span>
-        <span class="votes-insight">{{ leastSexVotesMessage }}</span>
-      </div>
-    </Card>
-    <Card
-      v-if="showInsights"
-      class="mt-3"
-      title="Insights com relação à intenção de votos por Renda Salarial"
-      subtitle="Consulte seus resultados com relação à intenção de votos por renda salarial"
-    >
-      {{ calculateIncomeVotesInsight() }}
-      <div class="votes-container">
-        <span class="votes-insight">{{ mostIncomeVotesMessage }}</span>
-        <span class="votes-insight">{{ leastIncomeVotesMessage }}</span>
+      <div class="insights-list">
+        <div class="insights-item">
+          <div class="insights-item-category">
+            <h1>Total de Votos</h1>
+          </div>
+          <div class="insights-item-info">
+            <span class="votes-insight">{{
+              calculateTotalVotesInsight()
+            }}</span>
+          </div>
+        </div>
+        <div class="insights-item">
+          <div class="insights-item-category">
+            <h1>Faixa Etária</h1>
+          </div>
+          <div class="insights-item-info">
+            {{ calculateAgeVotesInsight() }}
+            <span class="votes-insight">{{ mostGroupAgeMessage }}</span>
+            <span class="votes-insight">{{ leastGroupAgeMessage }}</span>
+          </div>
+        </div>
+        <div class="insights-item">
+          <div class="insights-item-category">
+            <h1>Religião</h1>
+          </div>
+          <div class="insights-item-info">
+            {{ calculateReligionVotesInsights() }}
+            <span class="votes-insight">{{ mostReligionVotesMessage }}</span>
+            <span class="votes-insight">{{ leastReligionVotesMessage }}</span>
+          </div>
+        </div>
+        <div class="insights-item">
+          <div class="insights-item-category">
+            <h1>Etnia</h1>
+          </div>
+          <div class="insights-item-info">
+            {{ calculateEthnicityVotesInsights() }}
+            <span class="votes-insight">{{ mostEthnicityVotesMessage }}</span>
+            <span class="votes-insight">{{ leastEthnicityVotesMessage }}</span>
+          </div>
+        </div>
+        <div class="insights-item">
+          <div class="insights-item-category">
+            <h1>Região</h1>
+          </div>
+          <div class="insights-item-info">
+            {{ calculateRegionVotesInsights() }}
+            <span class="votes-insight">{{ mostRegionVotesMessage }}</span>
+            <span class="votes-insight">{{ leastRegionVotesMessage }}</span>
+          </div>
+        </div>
+        <div class="insights-item">
+          <div class="insights-item-category">
+            <h1>Escolaridade</h1>
+          </div>
+          <div class="insights-item-info">
+            {{ calculateScholarityVotesInsights() }}
+            <span class="votes-insight">{{ mostScholarityVotesMessage }}</span>
+            <span class="votes-insight">{{ leastScholarityVotesMessage }}</span>
+          </div>
+        </div>
+        <div class="insights-item">
+          <div class="insights-item-category">
+            <h1>Sexo</h1>
+          </div>
+          <div class="insights-item-info">
+            {{ calculateSexVotesInsights() }}
+            <span class="votes-insight">{{ mostSexVotesMessage }}</span>
+            <span class="votes-insight">{{ leastSexVotesMessage }}</span>
+          </div>
+        </div>
+        <div class="insights-item">
+          <div class="insights-item-category">
+            <h1>Renda Salarial</h1>
+          </div>
+          <div class="insights-item-info">
+            {{ calculateIncomeVotesInsight() }}
+            <span class="votes-insight">{{ mostIncomeVotesMessage }}</span>
+            <span class="votes-insight">{{ leastIncomeVotesMessage }}</span>
+          </div>
+        </div>
       </div>
     </Card>
   </Page>
@@ -468,5 +465,41 @@ export default defineComponent({
 .votes-insight {
   color: #030303;
   margin-bottom: 0.1725rem;
+}
+
+.insights-list {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #495057;
+  /* Test Only */
+  /* background-color: red; */
+}
+
+.insights-item {
+  /* Test Only */
+  /* background-color: green; */
+  display: grid;
+  grid-template-columns: 10% 1fr;
+  border-bottom: 1px solid #e9e9ef;
+  height: 80px;
+}
+
+.insights-item:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.insights-item-category {
+  font-size: 0.5rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid #e9e9ef;
+}
+
+.insights-item-info {
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
 }
 </style>
