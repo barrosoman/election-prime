@@ -472,7 +472,7 @@ export class DataInsighter {
 
     if (this.candidatePresident)
       candidatesIncomeVotes = this.dataVisualizer.toPresidentsIncomeVote()
-    else candidatesIncomeVotes = this.dataVisualizer.toPresidentsIncomeVote()
+    else candidatesIncomeVotes = this.dataVisualizer.toGovernorsIncomeVote()
 
     const candidateIncomeVotes: SeriesData = candidatesIncomeVotes.filter(
       (seriesData) => seriesData.name === this.candidate
