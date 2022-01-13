@@ -40,13 +40,13 @@ export default defineComponent({
   },
   data() {
     return {
-      userAmount: 25,
-      dataGenerator: new DataGenerator()
+      userAmount: 25
     }
   },
   methods: {
     generateData() {
-      const csvFileData: string = this.dataGenerator.generateToFileData(
+      const dataGenerator = new DataGenerator()
+      const csvFileData: string = dataGenerator.generateToFileData(
         this.userAmount
       )
       const blob = new Blob([csvFileData], { type: 'text/csv;charset=UTF-8' })
