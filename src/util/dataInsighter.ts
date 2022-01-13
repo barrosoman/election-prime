@@ -130,6 +130,14 @@ export class DataInsighter {
    */
   readonly candidatePresident: boolean
 
+  /**
+   * Constructor of {@link DataInsighter} that specifies the name of the candidate
+   * which the insights will be made and the {@link DataVisualizer} that will be used
+   * to query the data information.
+   *
+   * @param {String} candidate the candidate name
+   * @param {DataVisualizer} dataVisualizer the data visualizer instance for query the data
+   */
   constructor(candidate: string, dataVisualizer: DataVisualizer) {
     this.candidate = candidate
     this.dataInfoArray = dataVisualizer.getVisualizedData()
@@ -139,8 +147,18 @@ export class DataInsighter {
       .some((name) => name === candidate)
   }
 
+  /**
+   * Returns the classification of the {@link candidate} which relation
+   * to the total votes.
+   *
+   * @returns the classification of the {@link candidate} with relation
+   *          to the total votes.
+   */
   getTotalVotesPosition(): number {
     const totalVotes: TotalVotes[] = this.getTotalVotes()
+
+    /* Sort the total votes with relation to the amount of votes */
+    /* that each candidate received.  */
     totalVotes.sort((a, b) => b.votes - a.votes)
 
     return (
@@ -208,6 +226,12 @@ export class DataInsighter {
     return [incomeVotes[0].income, incomeVotes[incomeVotes.length - 1].income]
   }
 
+  /**
+   * Returns an array of {@link TotalVotes} in which each instance of that one
+   * contains the name of a candidate and its amount of votes received.
+   *
+   * @returns {TotalVotes[]} an array of {@link TotalVotes}
+   */
   private getTotalVotes(): TotalVotes[] {
     const totalVotes: TotalVotes[] = []
     let candidateNames: string[]
@@ -233,6 +257,13 @@ export class DataInsighter {
     return totalVotes
   }
 
+  /**
+   * Returns an array of {@link AgeVotes} in which each instance of that one
+   * it is stored the age group and the amount of votes that group received.
+   *
+   * @returns an array of {@link AgeVotes} containing the age groups with
+   *          its votes with relation to the specified {@link candidate}.
+   */
   private getAgeVotes(): AgeVotes[] {
     let candidatesAgeVotes: SeriesData[]
 
@@ -240,9 +271,17 @@ export class DataInsighter {
       candidatesAgeVotes = this.dataVisualizer.toPresidentsAgeGroupVote()
     else candidatesAgeVotes = this.dataVisualizer.toGovernorsAgeGroupVote()
 
+    /* Filter the {@link SeriesData} just for that having the candidate name */
+    /* equals with the specified in this class. */
     const candidateAgeVotes: SeriesData = candidatesAgeVotes.filter(
       (seriesData) => seriesData.name === this.candidate
     )[0]
+
+    /* Check if the `candidateAgeVotes` has not been found. */
+    if (candidateAgeVotes === null || candidateAgeVotes === undefined)
+      throw new Error(
+        `There is no data with relation to age for the candidate ${this.candidate}`
+      )
 
     return [
       {
