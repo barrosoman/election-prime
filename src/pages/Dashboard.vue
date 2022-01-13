@@ -52,11 +52,6 @@
         class="graph-one-line"
         :content="this.dataVisualizer.toPresidentsRegionVote()"
       />
-      <RegionVoteIntention
-        target="Governador"
-        class="graph-one-line"
-        :content="this.dataVisualizer.toGovernorsRegionVote()"
-      />
       <ScholarityVoteIntention
         target="Presidência"
         class="graph-one-line"
