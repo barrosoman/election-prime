@@ -20,6 +20,14 @@ function randomInterval(
   return minInteger + Math.floor(random() * (maxInteger - minInteger))
 }
 
+function randomFloatInterval(
+  min: number,
+  max: number,
+  random: () => number
+): number {
+  return min + random() * (max - min)
+}
+
 /**
  * Returns a random generated number in the interval [min, max],
  * since both {@code min} and {@code max} has been set. Otherwise,
@@ -33,6 +41,11 @@ function randomInterval(
 export function randomInt(min?: number, max?: number): number {
   if (!min || !max) return Math.random()
   else return randomInterval(min, max, Math.random)
+}
+
+export function randomFloat(min?: number, max?: number): number {
+  if (!min || !max) return Math.random()
+  else return randomFloatInterval(min, max, Math.random)
 }
 
 /**
