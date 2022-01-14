@@ -43,8 +43,8 @@ function randomFloatInterval(
  * since both {@code min} and {@code max} has been set. Otherwise,
  * the interval is [0, 1].
  *
- * @param {Number} min the minimum bound of the interval
- * @param {Number} max the maximum bound of the interval
+ * @param {Number} [min] the minimum bound of the interval
+ * @param {Number} [max] the maximum bound of the interval
  *
  * @returns {Number} a random generated number in the interval [min, max]
  */
@@ -58,8 +58,8 @@ export function randomInt(min?: number, max?: number): number {
  * [min, max], since both {@code min} and {@code max} has been set.
  * Otherwise, the interval is [0, 1].
  *
- * @param min the minimum bound of the interval
- * @param max the maximum bound of the interval
+ * @param {Number} [min] the minimum bound of the interval
+ * @param [Number} [max] the maximum bound of the interval
  *
  * @returns {Number} a random generated floating-point number in the interval
  *                   [min, max]
