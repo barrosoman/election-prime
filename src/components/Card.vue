@@ -42,6 +42,7 @@ export default defineComponent({
   border: 1px solid #e9e9ef;
   border-radius: 0.25rem;
   flex: 1;
+  overflow-x: auto;
 }
 
 .card-header {
