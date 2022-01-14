@@ -20,6 +20,16 @@ function randomInterval(
   return minInteger + Math.floor(random() * (maxInteger - minInteger))
 }
 
+/**
+ * Returns a random generated floating-point number in the intterval [min, max]
+ * in which the random generated number is provided by the {@code random} function.
+ *
+ * @param {Number} min the minimum bound of the interval
+ * @param {Number} max the maximum bound of the interval
+ * @param {() => Number} random the random function
+ *
+ * @returns {Number} a random generated floating-point number in the interval [min, max].
+ */
 function randomFloatInterval(
   min: number,
   max: number,
@@ -43,6 +53,17 @@ export function randomInt(min?: number, max?: number): number {
   else return randomInterval(min, max, Math.random)
 }
 
+/**
+ * Returns a random generated floating-point number in the interval
+ * [min, max], since both {@code min} and {@code max} has been set.
+ * Otherwise, the interval is [0, 1].
+ *
+ * @param min the minimum bound of the interval
+ * @param max the maximum bound of the interval
+ *
+ * @returns {Number} a random generated floating-point number in the interval
+ *                   [min, max]
+ */
 export function randomFloat(min?: number, max?: number): number {
   if (!min || !max) return Math.random()
   else return randomFloatInterval(min, max, Math.random)
