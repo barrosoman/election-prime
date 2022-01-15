@@ -60,8 +60,12 @@
           </div>
           <div class="insights-item-info">
             {{ calculateAgeVotesInsight() }}
-            <span class="votes-insight">{{ mostGroupAgeMessage }}</span>
-            <span class="votes-insight">{{ leastGroupAgeMessage }}</span>
+            <span class="votes-insight">{{
+              messages.mostGroupAgeMessage
+            }}</span>
+            <span class="votes-insight">{{
+              messages.leastGroupAgeMessage
+            }}</span>
           </div>
         </div>
         <div class="insights-item">
@@ -70,8 +74,12 @@
           </div>
           <div class="insights-item-info">
             {{ calculateReligionVotesInsights() }}
-            <span class="votes-insight">{{ mostReligionVotesMessage }}</span>
-            <span class="votes-insight">{{ leastReligionVotesMessage }}</span>
+            <span class="votes-insight">{{
+              messages.mostReligionVotesMessage
+            }}</span>
+            <span class="votes-insight">{{
+              messages.leastReligionVotesMessage
+            }}</span>
           </div>
         </div>
         <div class="insights-item">
@@ -80,8 +88,12 @@
           </div>
           <div class="insights-item-info">
             {{ calculateEthnicityVotesInsights() }}
-            <span class="votes-insight">{{ mostEthnicityVotesMessage }}</span>
-            <span class="votes-insight">{{ leastEthnicityVotesMessage }}</span>
+            <span class="votes-insight">{{
+              messages.mostEthnicityVotesMessage
+            }}</span>
+            <span class="votes-insight">{{
+              messages.leastEthnicityVotesMessage
+            }}</span>
           </div>
         </div>
         <div class="insights-item">
@@ -90,8 +102,12 @@
           </div>
           <div class="insights-item-info">
             {{ calculateRegionVotesInsights() }}
-            <span class="votes-insight">{{ mostRegionVotesMessage }}</span>
-            <span class="votes-insight">{{ leastRegionVotesMessage }}</span>
+            <span class="votes-insight">{{
+              messages.mostRegionVotesMessage
+            }}</span>
+            <span class="votes-insight">{{
+              messages.leastRegionVotesMessage
+            }}</span>
           </div>
         </div>
         <div class="insights-item">
@@ -100,8 +116,12 @@
           </div>
           <div class="insights-item-info">
             {{ calculateScholarityVotesInsights() }}
-            <span class="votes-insight">{{ mostScholarityVotesMessage }}</span>
-            <span class="votes-insight">{{ leastScholarityVotesMessage }}</span>
+            <span class="votes-insight">{{
+              messages.mostScholarityVotesMessage
+            }}</span>
+            <span class="votes-insight">{{
+              messages.leastScholarityVotesMessage
+            }}</span>
           </div>
         </div>
         <div class="insights-item">
@@ -110,8 +130,12 @@
           </div>
           <div class="insights-item-info">
             {{ calculateSexVotesInsights() }}
-            <span class="votes-insight">{{ mostSexVotesMessage }}</span>
-            <span class="votes-insight">{{ leastSexVotesMessage }}</span>
+            <span class="votes-insight">{{
+              messages.mostSexVotesMessage
+            }}</span>
+            <span class="votes-insight">{{
+              messages.leastSexVotesMessage
+            }}</span>
           </div>
         </div>
         <div class="insights-item">
@@ -120,8 +144,12 @@
           </div>
           <div class="insights-item-info">
             {{ calculateIncomeVotesInsight() }}
-            <span class="votes-insight">{{ mostIncomeVotesMessage }}</span>
-            <span class="votes-insight">{{ leastIncomeVotesMessage }}</span>
+            <span class="votes-insight">{{
+              messages.mostIncomeVotesMessage
+            }}</span>
+            <span class="votes-insight">{{
+              messages.leastIncomeVotesMessage
+            }}</span>
           </div>
         </div>
       </div>
@@ -133,6 +161,7 @@
 import { defineComponent } from 'vue'
 import { DataVisualizer } from '@/util/dataVisualizer'
 import { DataInsighter } from '@/util/dataInsighter'
+import { InsightsMessage } from '@/models/Insights'
 
 import Page from '@/components/Page.vue'
 import Card from '@/components/Card.vue'
@@ -153,20 +182,7 @@ export default defineComponent({
       governorsNames: [] as string[],
       unrecgonizedCandidate: false,
       showInsights: false,
-      mostGroupAgeMessage: '',
-      leastGroupAgeMessage: '',
-      mostReligionVotesMessage: '',
-      leastReligionVotesMessage: '',
-      mostEthnicityVotesMessage: '',
-      leastEthnicityVotesMessage: '',
-      mostRegionVotesMessage: '',
-      leastRegionVotesMessage: '',
-      mostScholarityVotesMessage: '',
-      leastScholarityVotesMessage: '',
-      mostSexVotesMessage: '',
-      leastSexVotesMessage: '',
-      mostIncomeVotesMessage: '',
-      leastIncomeVotesMessage: ''
+      messages: {} as InsightsMessage
     }
   },
   mounted() {
@@ -275,8 +291,8 @@ export default defineComponent({
       else if (leastGroupAge === '>79')
         leastGroupAgeMessage = 'Os com mais de 79 anos não o apoiam!'
 
-      this.mostGroupAgeMessage = mostGroupAgeMessage
-      this.leastGroupAgeMessage = leastGroupAgeMessage
+      this.messages.mostGroupAgeMessage = mostGroupAgeMessage
+      this.messages.leastGroupAgeMessage = leastGroupAgeMessage
     },
     /**
      * This method informs the insights of the vote with relation to religion.
@@ -298,8 +314,8 @@ export default defineComponent({
         leastReligionVotesInfo = leastReligionVotes.toLowerCase() + 's'
       else leastReligionVotesInfo = leastReligionVotes
 
-      this.mostReligionVotesMessage = `Os ${mostReligionVotesInfo} estão te apoiando imensamente!`
-      this.leastReligionVotesMessage = `Devemos nos focar nas necessidades dos ${leastReligionVotesInfo}.`
+      this.messages.mostReligionVotesMessage = `Os ${mostReligionVotesInfo} estão te apoiando imensamente!`
+      this.messages.leastReligionVotesMessage = `Devemos nos focar nas necessidades dos ${leastReligionVotesInfo}.`
     },
     /**
      * This method informs the insights of the vote with relation to ethnicity.
@@ -327,8 +343,8 @@ export default defineComponent({
             .substring(0, leastEthnicityVotes.length - 1) + 'a'
       else leastEthnicityVotesInfo = leastEthnicityVotes.toLowerCase()
 
-      this.mostEthnicityVotesMessage = `A população ${mostEthnicityVotesInfo} é a que mais te apoia nessa corrida eleitoral!`
-      this.leastEthnicityVotesMessage = `A população ${leastEthnicityVotesInfo} mostram que não compatibilizam com sua campanha!`
+      this.messages.mostEthnicityVotesMessage = `A população ${mostEthnicityVotesInfo} é a que mais te apoia nessa corrida eleitoral!`
+      this.messages.leastEthnicityVotesMessage = `A população ${leastEthnicityVotesInfo} mostram que não compatibilizam com sua campanha!`
     },
     /**
      * This method informs the insights of the vote with relation to region.
@@ -339,8 +355,8 @@ export default defineComponent({
       const [mostRegionVotes, leastRegionVotes] =
         this.dataInsighter.getRegionVotesMostAndLeast()
 
-      this.mostRegionVotesMessage = `A região ${mostRegionVotes} mostra ser uma grande aliada à sua vitória!`
-      this.leastRegionVotesMessage = `Devemos focar nas necessidades da região ${leastRegionVotes} que não apoia fortemente sua campanha!`
+      this.messages.mostRegionVotesMessage = `A região ${mostRegionVotes} mostra ser uma grande aliada à sua vitória!`
+      this.messages.leastRegionVotesMessage = `Devemos focar nas necessidades da região ${leastRegionVotes} que não apoia fortemente sua campanha!`
     },
     /**
      * This method informs the insights of the vote with relation to scholarity.
@@ -355,8 +371,8 @@ export default defineComponent({
       const withLeastScholarity =
         leastScholarityVotes === 'Sem Escolaridade' ? '' : 'com'
 
-      this.mostScholarityVotesMessage = `Os eleitores ${withMostScholarity} ${mostScholarityVotes} apoiam sua campanha!`
-      this.leastScholarityVotesMessage = `Indispensável rever as necessidades dos eleitores ${withLeastScholarity} ${leastScholarityVotes} que parecem não simpartizar com sua corrida eleitoral!`
+      this.messages.mostScholarityVotesMessage = `Os eleitores ${withMostScholarity} ${mostScholarityVotes} apoiam sua campanha!`
+      this.messages.leastScholarityVotesMessage = `Indispensável rever as necessidades dos eleitores ${withLeastScholarity} ${leastScholarityVotes} que parecem não simpartizar com sua corrida eleitoral!`
     },
     /**
      * This method informs the insights of the vote with relation to sex.
@@ -369,8 +385,8 @@ export default defineComponent({
       const mostSexVotesInfo = mostSexVotes === 'M' ? 'Masculino' : 'Feminino'
       const leastSexVotesInfo = leastSexVotes === 'M' ? 'Masculino' : 'Feminino'
 
-      this.mostSexVotesMessage = `Os eleitores do sexo ${mostSexVotesInfo} contribuem com sua jornada!`
-      this.leastSexVotesMessage = `Poxa, devemos focar nas dificuldades da população do sexo ${leastSexVotesInfo}.`
+      this.messages.mostSexVotesMessage = `Os eleitores do sexo ${mostSexVotesInfo} contribuem com sua jornada!`
+      this.messages.leastSexVotesMessage = `Poxa, devemos focar nas dificuldades da população do sexo ${leastSexVotesInfo}.`
     },
     /**
      * This method calculates the insights with relation to the income
@@ -393,8 +409,8 @@ export default defineComponent({
         leastIncomeVotesMessage = 'mais de 10'
       else leastIncomeVotesMessage = leastIncomeVotes
 
-      this.mostIncomeVotesMessage = `A população com renda salarial de ${mostIncomeVotesMessage} salários mínimos colaboram com sua campanha!`
-      this.leastIncomeVotesMessage = `Precisamos rever as dificuldades que a população com renda salarial de ${leastIncomeVotesMessage} salários mínimos.`
+      this.messages.mostIncomeVotesMessage = `A população com renda salarial de ${mostIncomeVotesMessage} salários mínimos colaboram com sua campanha!`
+      this.messages.leastIncomeVotesMessage = `Precisamos rever as dificuldades que a população com renda salarial de ${leastIncomeVotesMessage} salários mínimos.`
     }
   }
 })
