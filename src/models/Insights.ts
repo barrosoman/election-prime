@@ -6,8 +6,8 @@ export interface InsightsMessage {
   /**
    * Messages related to the group age.
    */
-  mostGroupAgeMessage: string
-  leastGroupAgeMessage: string
+  mostAndLeastGroupAgeMessage: string
+  relateGroupAgeMessage: string
 
   /**
    * Messages related to the religion.
