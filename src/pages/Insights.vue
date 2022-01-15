@@ -145,10 +145,10 @@
           <div class="insights-item-info">
             {{ calculateIncomeVotesInsight() }}
             <span class="votes-insight">{{
-              messages.mostIncomeVotesMessage
+              messages.mostAndLeastIncomeVotesMessage
             }}</span>
             <span class="votes-insight">{{
-              messages.leastIncomeVotesMessage
+              messages.relateIncomeMessage
             }}</span>
           </div>
         </div>
@@ -463,7 +463,7 @@ export default defineComponent({
 
       let relateScholarityMessage = ''
 
-      /* Votes by region for this candidate */
+      /* Votes by scholarity for this candidate */
       let scholarityGroupVotes: number[] = []
 
       if (this.isCandidatePresident)
@@ -520,6 +520,7 @@ export default defineComponent({
 
       let mostIncomeVotesMessage = ''
       let leastIncomeVotesMessage = ''
+      let relateIncomeMessage = ''
 
       const [mostIncomeVotes, leastIncomeVotes] =
         this.dataInsighter.getIncomeVotesMostAndLeast()
@@ -533,8 +534,39 @@ export default defineComponent({
         leastIncomeVotesMessage = 'mais de 10'
       else leastIncomeVotesMessage = leastIncomeVotes
 
-      this.messages.mostIncomeVotesMessage = `A população com renda salarial de ${mostIncomeVotesMessage} salários mínimos colaboram com sua campanha!`
-      this.messages.leastIncomeVotesMessage = `Precisamos rever as dificuldades que a população com renda salarial de ${leastIncomeVotesMessage} salários mínimos.`
+      /* Votes by scholarity for this candidate */
+      let incomeGroupVotes: number[] = []
+
+      if (this.isCandidatePresident)
+        incomeGroupVotes = this.dataVisualizer
+          .toPresidentsIncomeVote()
+          .filter((seriesData) => seriesData.name === this.candidate)[0].data
+      else
+        incomeGroupVotes = this.dataVisualizer
+          .toGovernorsIncomeVote()
+          .filter((seriesData) => seriesData.name === this.candidate)[0].data
+
+      /* Statistics Calculation */
+      const mean = DataStatistics.mean(incomeGroupVotes)
+      const standardDeviation =
+        DataStatistics.standardDeviation(incomeGroupVotes)
+      const [Q1, Q3] = DataStatistics.quartile(incomeGroupVotes)
+      const variation = (standardDeviation / mean) * 100.0
+
+      relateIncomeMessage = `Você teve uma média de ${mean.toFixed(
+        1
+      )} votos. Ainda mais, a partir do seu coeficiente de variação podemos afirmar que `
+
+      if (variation > 70.0)
+        relateIncomeMessage += `você teve votos de várias classes sociais, ou seja, pouca concentração em algumas.`
+      else
+        relateIncomeMessage +=
+          'você teve votos de poucas classes sociais, ou seja, uma concentração maior em algumas.'
+
+      relateIncomeMessage += ` Além disso, a partir dos quartis, podemos afirmar que 50% das classes sociais tiveram uma quantidade de voto entre ${Q1} e ${Q3} votos.`
+
+      this.messages.mostAndLeastIncomeVotesMessage = `A população com renda salarial de ${mostIncomeVotesMessage} salários mínimos colaboram com sua campanha. Em contrapartida, precisamos rever as dificuldades que a população com renda salarial de ${leastIncomeVotesMessage} salários mínimos.`
+      this.messages.relateIncomeMessage = relateIncomeMessage
     }
   }
 })

@@ -42,6 +42,6 @@ export interface InsightsMessage {
   /**
    * Messages related to the income.
    */
-  mostIncomeVotesMessage: string
-  leastIncomeVotesMessage: string
+  mostAndLeastIncomeVotesMessage: string
+  relateIncomeMessage: string
 }
