@@ -61,7 +61,7 @@
           <div class="insights-item-info">
             {{ calculateAgeVotesInsight() }}
             <span class="votes-insight">{{
-              'dsfjasdklfjdsalfjdsafçlkjdsalfkçjdsalçfjasdçlfjçlsad\nTESTING 123!'
+              messages.mostGroupAgeMessage
             }}</span>
             <span class="votes-insight">{{
               messages.leastGroupAgeMessage
