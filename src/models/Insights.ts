@@ -18,8 +18,8 @@ export interface InsightsMessage {
   /**
    * Messages related to the ethnicity.
    */
-  mostEthnicityVotesMessage: string
-  leastEthnicityVotesMessage: string
+  mostAndLeastEthnicityVotesMessage: string
+  relateEthnicityMessage: string
 
   /**
    * Messages related to the region.

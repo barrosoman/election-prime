@@ -89,10 +89,10 @@
           <div class="insights-item-info">
             {{ calculateEthnicityVotesInsights() }}
             <span class="votes-insight">{{
-              messages.mostEthnicityVotesMessage
+              messages.mostAndLeastEthnicityVotesMessage
             }}</span>
             <span class="votes-insight">{{
-              messages.leastEthnicityVotesMessage
+              messages.relateEthnicityMessage
             }}</span>
           </div>
         </div>
@@ -351,6 +351,7 @@ export default defineComponent({
 
       let mostEthnicityVotesInfo = ''
       let leastEthnicityVotesInfo = ''
+      let relateEthnicityMessage = ''
 
       if (mostEthnicityVotes !== 'Indígena')
         mostEthnicityVotesInfo =
@@ -366,8 +367,40 @@ export default defineComponent({
             .substring(0, leastEthnicityVotes.length - 1) + 'a'
       else leastEthnicityVotesInfo = leastEthnicityVotes.toLowerCase()
 
-      this.messages.mostEthnicityVotesMessage = `A população ${mostEthnicityVotesInfo} é a que mais te apoia nessa corrida eleitoral!`
-      this.messages.leastEthnicityVotesMessage = `A população ${leastEthnicityVotesInfo} mostram que não compatibilizam com sua campanha!`
+      /* Votes by age group for this candidate */
+      let ethnicityGroupVotes: number[] = []
+
+      if (this.isCandidatePresident)
+        ethnicityGroupVotes = this.dataVisualizer
+          .toPresidentsEthnicityVote()
+          .filter((seriesData) => seriesData.name === this.candidate)[0].data
+      else
+        ethnicityGroupVotes = this.dataVisualizer
+          .toGovernorsEthnicityVote()
+          .filter((seriesData) => seriesData.name === this.candidate)[0].data
+
+      /* Statistics Calculation */
+      const mean = DataStatistics.mean(ethnicityGroupVotes)
+      const median = DataStatistics.median(ethnicityGroupVotes)
+      const standardDeviation =
+        DataStatistics.standardDeviation(ethnicityGroupVotes)
+      const [Q1, Q3] = DataStatistics.quartile(ethnicityGroupVotes)
+      const variation = (standardDeviation / mean) * 100.0
+
+      relateEthnicityMessage = `Você teve uma mediana de ${median.toFixed(
+        1
+      )} votos. Ainda mais, a partir do seu coeficiente de variação podemos afirmar que `
+
+      if (variation > 70.0)
+        relateEthnicityMessage += `você teve votos de vários grupos populacionais, ou seja, pouca concentração em algumas.`
+      else
+        relateEthnicityMessage +=
+          'você teve votos de poucos grupos populacionais, ou seja, uma concentração maior em algumas.'
+
+      relateEthnicityMessage += ` Além disso, a partir dos quartis, podemos afirmar que 50% dos grupos populacionais tiveram uma quantidade de voto entre ${Q1} e ${Q3} votos.`
+
+      this.messages.mostAndLeastEthnicityVotesMessage = `A população ${mostEthnicityVotesInfo} é a que mais te apoia nessa corrida eleitoral. Todavia, a população ${leastEthnicityVotesInfo} mostram que não compatibilizam com sua campanha`
+      this.messages.relateEthnicityMessage = relateEthnicityMessage
     },
     /**
      * This method informs the insights of the vote with relation to region.
