@@ -75,10 +75,7 @@
           <div class="insights-item-info">
             {{ calculateReligionVotesInsights() }}
             <span class="votes-insight">{{
-              messages.mostReligionVotesMessage
-            }}</span>
-            <span class="votes-insight">{{
-              messages.leastReligionVotesMessage
+              messages.mostAndLeastReligionVotesMessage
             }}</span>
           </div>
         </div>
@@ -291,8 +288,7 @@ export default defineComponent({
         leastReligionVotesInfo = leastReligionVotes.toLowerCase() + 's'
       else leastReligionVotesInfo = leastReligionVotes
 
-      this.messages.mostReligionVotesMessage = `Os ${mostReligionVotesInfo} estão te apoiando imensamente!`
-      this.messages.leastReligionVotesMessage = `Devemos nos focar nas necessidades dos ${leastReligionVotesInfo}.`
+      this.messages.mostAndLeastReligionVotesMessage = `Os ${mostReligionVotesInfo} estão te apoiando imensamente nesta campanha. Contudo, visualizamos que o ${leastReligionVotesInfo} parece não estar te apoiando tanto quanto.`
     },
     /**
      * This method informs the insights of the vote with relation to ethnicity.
