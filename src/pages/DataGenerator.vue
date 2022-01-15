@@ -5,7 +5,7 @@
       subtitle="Realize as principais configurações dos parâmetros para a geração de dados"
     >
       <div class="user-generated-amount-container">
-        <label>Quantos usuários deseja gerar?: </label>
+        <!-- <label>Quantos usuários deseja gerar no máximo?: </label>
         <select
           v-model="userAmount"
           name="user-generated-amount"
@@ -17,7 +17,7 @@
           <option value="500">500</option>
           <option value="1000">1000</option>
           <option value="10000">10000</option>
-        </select>
+        </select> -->
         <Button content="Gerar Dados!" @clicked="generateData"></Button>
       </div>
     </Card>
