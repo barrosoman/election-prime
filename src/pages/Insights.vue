@@ -61,7 +61,7 @@
           <div class="insights-item-info">
             {{ calculateAgeVotesInsight() }}
             <span class="votes-insight">{{
-              messages.mostGroupAgeMessage
+              'dsfjasdklfjdsalfjdsafçlkjdsalfkçjdsalçfjasdçlfjçlsad\nTESTING 123!'
             }}</span>
             <span class="votes-insight">{{
               messages.leastGroupAgeMessage
@@ -515,7 +515,8 @@ export default defineComponent({
 
 .insights-item-info {
   padding: 0.5rem 1rem;
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: -1.25rem;
 }
 </style>
