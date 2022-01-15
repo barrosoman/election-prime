@@ -103,10 +103,10 @@
           <div class="insights-item-info">
             {{ calculateRegionVotesInsights() }}
             <span class="votes-insight">{{
-              messages.mostRegionVotesMessage
+              messages.mostAndLeastRegionVotesMessage
             }}</span>
             <span class="votes-insight">{{
-              messages.leastRegionVotesMessage
+              messages.relateRegionMessage
             }}</span>
           </div>
         </div>
@@ -306,7 +306,7 @@ export default defineComponent({
         leastReligionVotesInfo = leastReligionVotes.toLowerCase() + 's'
       else leastReligionVotesInfo = leastReligionVotes
 
-      /* Votes by age group for this candidate */
+      /* Votes by religion group for this candidate */
       let religionGroupVotes: number[] = []
 
       if (this.isCandidatePresident)
@@ -367,7 +367,7 @@ export default defineComponent({
             .substring(0, leastEthnicityVotes.length - 1) + 'a'
       else leastEthnicityVotesInfo = leastEthnicityVotes.toLowerCase()
 
-      /* Votes by age group for this candidate */
+      /* Votes by ethnicity group for this candidate */
       let ethnicityGroupVotes: number[] = []
 
       if (this.isCandidatePresident)
@@ -411,8 +411,42 @@ export default defineComponent({
       const [mostRegionVotes, leastRegionVotes] =
         this.dataInsighter.getRegionVotesMostAndLeast()
 
-      this.messages.mostRegionVotesMessage = `A região ${mostRegionVotes} mostra ser uma grande aliada à sua vitória!`
-      this.messages.leastRegionVotesMessage = `Devemos focar nas necessidades da região ${leastRegionVotes} que não apoia fortemente sua campanha!`
+      let relateRegionMessage = ''
+
+      /* Votes by region for this candidate */
+      let regionGroupVotes: number[] = []
+
+      if (this.isCandidatePresident)
+        regionGroupVotes = this.dataVisualizer
+          .toPresidentsRegionVote()
+          .filter((seriesData) => seriesData.name === this.candidate)[0].data
+      else
+        regionGroupVotes = this.dataVisualizer
+          .toGovernorsRegionVote()
+          .filter((seriesData) => seriesData.name === this.candidate)[0].data
+
+      /* Statistics Calculation */
+      const mean = DataStatistics.mean(regionGroupVotes)
+      const median = DataStatistics.median(regionGroupVotes)
+      const standardDeviation =
+        DataStatistics.standardDeviation(regionGroupVotes)
+      const [Q1, Q3] = DataStatistics.quartile(regionGroupVotes)
+      const variation = (standardDeviation / mean) * 100.0
+
+      relateRegionMessage = `Você teve uma mediana de ${median.toFixed(
+        1
+      )} votos. Ainda mais, a partir do seu coeficiente de variação podemos afirmar que `
+
+      if (variation > 70.0)
+        relateRegionMessage += `você teve votos de vários grupos populacionais, ou seja, pouca concentração em algumas.`
+      else
+        relateRegionMessage +=
+          'você teve votos de poucos grupos populacionais, ou seja, uma concentração maior em algumas.'
+
+      relateRegionMessage += ` Além disso, a partir dos quartis, podemos afirmar que 50% dos grupos populacionais tiveram uma quantidade de voto entre ${Q1} e ${Q3} votos.`
+
+      this.messages.mostAndLeastRegionVotesMessage = `A região ${mostRegionVotes} mostra ser uma grande aliada à sua vitória. De outra forma, devemos focar nas necessidades da região ${leastRegionVotes} que não apoia fortemente sua campanha!`
+      this.messages.relateRegionMessage = relateRegionMessage
     },
     /**
      * This method informs the insights of the vote with relation to scholarity.

@@ -24,8 +24,8 @@ export interface InsightsMessage {
   /**
    * Messages related to the region.
    */
-  mostRegionVotesMessage: string
-  leastRegionVotesMessage: string
+  mostAndLeastRegionVotesMessage: string
+  relateRegionMessage: string
 
   /**
    * Messages related to the scholarity.
