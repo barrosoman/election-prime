@@ -45,10 +45,20 @@ export default defineComponent({
   },
   methods: {
     generateData() {
-      const dataGenerator = new DataGenerator()
-      const csvFileData: string = dataGenerator.generateToFileData(
-        this.userAmount
-      )
+      alert(`Testing Data Generator v1.0.25!`)
+      const firstDataGenerator = new DataGenerator('Carlos Alves Rodrigues')
+      const secondDataGenerator = new DataGenerator('Luan Santos Gomes')
+      const thirdDataGenerator = new DataGenerator('Rafael Correia Pinto')
+      const fourthDataGenerator = new DataGenerator('Julia Melo Martins')
+      const fifthDataGenerator = new DataGenerator('Rebeca Cardoso Goncalves')
+
+      const csvFileData: string =
+        firstDataGenerator.generateToFileData(Math.random() * 1000) +
+        secondDataGenerator.generateToFileData(Math.random() * 1000) +
+        thirdDataGenerator.generateToFileData(Math.random() * 1000) +
+        fourthDataGenerator.generateToFileData(Math.random() * 1000) +
+        fifthDataGenerator.generateToFileData(Math.random() * 1000)
+
       const blob = new Blob([csvFileData], { type: 'text/csv;charset=UTF-8' })
       const elem = window.document.createElement('a')
 

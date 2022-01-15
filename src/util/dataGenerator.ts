@@ -7,7 +7,13 @@ import {
   Sex
 } from '@/models/DataInfo'
 
-import { randomInt, randomSelect } from '@/util/random'
+import {
+  randomGaussian,
+  randomInt,
+  randomFloat,
+  randomSelect
+} from '@/util/random'
+import clamp from './clamp'
 
 /**
  * The {@link DataGenerator} class handles the randomized generation
@@ -100,6 +106,39 @@ export class DataGenerator {
     'Luiz Cavalcanti Ferreira'
   ]
 
+  private readonly presidentName: string
+
+  private readonly randomAgeFunction: () => number
+  private readonly randomReligionFunction: () => Religion
+
+  constructor(presidentName: string) {
+    this.presidentName = presidentName
+
+    if (Math.random() > 0.6)
+      this.randomAgeFunction = () =>
+        randomGaussian(47 + randomInt(-20, 0), 12 + randomInt(8, 16))
+    else
+      this.randomAgeFunction = () =>
+        randomInt(
+          DataGenerator.MINIMUM_AGE + randomInt(0, 16),
+          DataGenerator.MAXIMUM_AGE - randomInt(24, 47)
+        )
+
+    const randomizedMean = Math.random()
+    const randomizedStandardDeviation = clamp(0.1, Math.random(), 0.7)
+
+    console.log(`m: ${randomizedMean}, stdDev: ${randomizedStandardDeviation}`)
+
+    this.randomReligionFunction = () =>
+      randomSelect(DataGenerator.RELIGIONS, () =>
+        clamp(
+          0,
+          randomGaussian(randomizedMean, randomizedStandardDeviation),
+          0.99
+        )
+      )
+  }
+
   /**
    * Generates a random array of {@link DataInfo}.
    *
@@ -142,28 +181,16 @@ export class DataGenerator {
    */
   private generateVote(): DataInfo {
     return {
-      age: this.randomAge(),
-      religion: this.randomReligion(),
+      age: this.randomAgeFunction(),
+      religion: this.randomReligionFunction(),
       ethnicity: this.randomEthnicity(),
       region: this.randomRegion(),
       scholarity: this.randomScholarity(),
       sex: this.randomSex(),
       income: this.randomIncome(),
-      ivp: this.randomPresidentName(),
+      ivp: this.presidentName,
       ivg: this.randomGovernorName()
     }
-  }
-
-  /**
-   * Returns a random generated number with Gaussian distribution
-   * in the interval defined by [{@code DataGenerator#MINIMUM_AGE},
-   * {@code DataGenerator#MAXIMUM_AGE}].
-   *
-   * @returns a random generated number with Gaussian distribution in
-   *          the defined interval.
-   */
-  private randomAge(): number {
-    return randomInt(DataGenerator.MINIMUM_AGE, DataGenerator.MAXIMUM_AGE)
   }
 
   /**
@@ -238,6 +265,8 @@ export class DataGenerator {
    * @returns a random selected governor name from {@code DataGenerator#GOVERNOR_NAMES}
    */
   private randomGovernorName(): string {
-    return randomSelect(DataGenerator.GOVERNOR_NAMES)
+    return randomSelect(DataGenerator.GOVERNOR_NAMES, () =>
+      clamp(0, randomGaussian(0.5, 0.3), 0.9)
+    )
   }
 }
