@@ -61,10 +61,10 @@
           <div class="insights-item-info">
             {{ calculateAgeVotesInsight() }}
             <span class="votes-insight">{{
-              messages.mostGroupAgeMessage
+              messages.mostAndLeastGroupAgeMessage
             }}</span>
             <span class="votes-insight">{{
-              messages.leastGroupAgeMessage
+              messages.relateGroupAgeMessage
             }}</span>
           </div>
         </div>
@@ -161,6 +161,7 @@
 import { defineComponent } from 'vue'
 import { DataVisualizer } from '@/util/dataVisualizer'
 import { DataInsighter } from '@/util/dataInsighter'
+import { DataStatistics } from '@/util/dataStatistics'
 import { InsightsMessage } from '@/models/Insights'
 
 import Page from '@/components/Page.vue'
@@ -239,60 +240,36 @@ export default defineComponent({
     calculateAgeVotesInsight(): void {
       if (this.dataInsighter === undefined) throw 'data insighter undefined'
 
-      let mostGroupAgeMessage = ''
-      let leastGroupAgeMessage = ''
+      let mostAndLeastGroupAgeMessage = ''
+      let relateGroupAgeMessage = ''
 
       const [mostGroupAge, leastGroupAge] =
         this.dataInsighter.getAgeVotesMostAndLeast()
 
-      if (mostGroupAge === '16')
-        mostGroupAgeMessage = 'Os jovens estão loucos por você!'
-      else if (mostGroupAge === '17')
-        mostGroupAgeMessage = 'Os pré-adultos estão te adorando!'
-      else if (mostGroupAge === '18-20')
-        mostGroupAgeMessage = 'Os jovens adultos te apoaim!'
-      else if (mostGroupAge === '21-24')
-        mostGroupAgeMessage = 'Você está com o pessoal dos 21 aos 24 anos!'
-      else if (mostGroupAge === '25-34')
-        mostGroupAgeMessage =
-          'Com certeza, a população dos 25 aos 34 anos o apoia!'
-      else if (mostGroupAge === '35-44')
-        mostGroupAgeMessage = 'Os adultos estão te apoiando!'
-      else if (mostGroupAge === '45-59')
-        mostGroupAgeMessage = 'A meia-idade está com você!'
-      else if (mostGroupAge === '60-69')
-        mostGroupAgeMessage = 'A população dos 60 ao 69 anos está com você!'
-      else if (mostGroupAge === '70-79')
-        mostGroupAgeMessage = 'Os idosos estão te adorando!'
-      else if (mostGroupAge === '>79')
-        mostGroupAgeMessage = 'O apoio dos com mais de 79 anos é seu!'
+      /* Votes by age group for this candidate */
+      const ageGroupVotes: number[] = this.dataVisualizer
+        .toPresidentsAgeGroupVote()
+        .filter((seriesData) => seriesData.name === this.candidate)[0].data
 
-      if (leastGroupAge === '16')
-        leastGroupAgeMessage = 'Necessitamos focar mais na comunidade jovem!'
-      else if (leastGroupAge === '17')
-        leastGroupAgeMessage = 'É preciso focar nos pré-adultos!'
-      else if (leastGroupAge === '18-20')
-        leastGroupAgeMessage = 'É vital focar nos jovens adultos!'
-      else if (leastGroupAge === '21-24')
-        leastGroupAgeMessage = 'Primordial focar no pessoal dos 21 aos 24 anos!'
-      else if (leastGroupAge === '25-34')
-        leastGroupAgeMessage =
-          'Devemos destacar a população dos 25 aos 34 anos!'
-      else if (leastGroupAge === '35-44')
-        leastGroupAgeMessage =
-          'Algo deve ser feito para que os adultos o apoie!'
-      else if (leastGroupAge === '45-59')
-        leastGroupAgeMessage = 'É fato, a meia-idade não está te apoiando!'
-      else if (leastGroupAge === '60-69')
-        leastGroupAgeMessage =
-          'A faixa etária dos 60 aos 69 anos está difícil para você!'
-      else if (leastGroupAge === '70-79')
-        leastGroupAgeMessage = 'Devemos focar nas questões dos idosos!'
-      else if (leastGroupAge === '>79')
-        leastGroupAgeMessage = 'Os com mais de 79 anos não o apoiam!'
+      /* Statistics Calculation */
+      const mean = DataStatistics.mean(ageGroupVotes)
+      const standardDeviation = DataStatistics.standardDeviation(ageGroupVotes)
+      const [Q1, Q3] = DataStatistics.quartile(ageGroupVotes)
+      const variation = (standardDeviation / mean) * 100.0
 
-      this.messages.mostGroupAgeMessage = mostGroupAgeMessage
-      this.messages.leastGroupAgeMessage = leastGroupAgeMessage
+      mostAndLeastGroupAgeMessage = `A faixa etária ${mostGroupAge} anos é a que mais está te apoiando nesta campanha. Por outro lado, devemos rever a faixa etária ${leastGroupAge} anos que mostra não seguir sua campanha!`
+      relateGroupAgeMessage = `Você teve uma média de ${mean} votos. Ainda mais, a partir do seu coeficiente de variação podemos afirmar que `
+
+      if (variation > 70.0)
+        relateGroupAgeMessage += `você teve votos de várias faixas etárias, ou seja, pouca concentração em alguns grupos.`
+      else
+        relateGroupAgeMessage +=
+          'você teve votos de poucas faixas etárias, ou seja, uma concentração maior em alguns grupos.'
+
+      relateGroupAgeMessage += ` Além disso, a partir dos quartis, podemos afirmar que 50% das faixas etárias tiveram uma quantidade de voto entre ${Q1} e ${Q3} votos.`
+
+      this.messages.mostAndLeastGroupAgeMessage = mostAndLeastGroupAgeMessage
+      this.messages.relateGroupAgeMessage = relateGroupAgeMessage
     },
     /**
      * This method informs the insights of the vote with relation to religion.
