@@ -117,10 +117,10 @@
           <div class="insights-item-info">
             {{ calculateScholarityVotesInsights() }}
             <span class="votes-insight">{{
-              messages.mostScholarityVotesMessage
+              messages.mostAndLeastScholarityVotesMessage
             }}</span>
             <span class="votes-insight">{{
-              messages.leastScholarityVotesMessage
+              messages.relateScholarityMessage
             }}</span>
           </div>
         </div>
@@ -438,12 +438,12 @@ export default defineComponent({
       )} votos. Ainda mais, a partir do seu coeficiente de variação podemos afirmar que `
 
       if (variation > 70.0)
-        relateRegionMessage += `você teve votos de vários grupos populacionais, ou seja, pouca concentração em algumas.`
+        relateRegionMessage += `você teve votos de várias regiões, ou seja, pouca concentração em algumas.`
       else
         relateRegionMessage +=
-          'você teve votos de poucos grupos populacionais, ou seja, uma concentração maior em algumas.'
+          'você teve votos de poucas regiões, ou seja, uma concentração maior em algumas.'
 
-      relateRegionMessage += ` Além disso, a partir dos quartis, podemos afirmar que 50% dos grupos populacionais tiveram uma quantidade de voto entre ${Q1} e ${Q3} votos.`
+      relateRegionMessage += ` Além disso, a partir dos quartis, podemos afirmar que 50% das regiões tiveram uma quantidade de voto entre ${Q1} e ${Q3} votos.`
 
       this.messages.mostAndLeastRegionVotesMessage = `A região ${mostRegionVotes} mostra ser uma grande aliada à sua vitória. De outra forma, devemos focar nas necessidades da região ${leastRegionVotes} que não apoia fortemente sua campanha!`
       this.messages.relateRegionMessage = relateRegionMessage
@@ -461,8 +461,42 @@ export default defineComponent({
       const withLeastScholarity =
         leastScholarityVotes === 'Sem Escolaridade' ? '' : 'com'
 
-      this.messages.mostScholarityVotesMessage = `Os eleitores ${withMostScholarity} ${mostScholarityVotes} apoiam sua campanha!`
-      this.messages.leastScholarityVotesMessage = `Indispensável rever as necessidades dos eleitores ${withLeastScholarity} ${leastScholarityVotes} que parecem não simpartizar com sua corrida eleitoral!`
+      let relateScholarityMessage = ''
+
+      /* Votes by region for this candidate */
+      let scholarityGroupVotes: number[] = []
+
+      if (this.isCandidatePresident)
+        scholarityGroupVotes = this.dataVisualizer
+          .toPresidentsScholarityVote()
+          .filter((seriesData) => seriesData.name === this.candidate)[0].data
+      else
+        scholarityGroupVotes = this.dataVisualizer
+          .toGovernorsScholarityVote()
+          .filter((seriesData) => seriesData.name === this.candidate)[0].data
+
+      /* Statistics Calculation */
+      const mean = DataStatistics.mean(scholarityGroupVotes)
+      const median = DataStatistics.median(scholarityGroupVotes)
+      const standardDeviation =
+        DataStatistics.standardDeviation(scholarityGroupVotes)
+      const [Q1, Q3] = DataStatistics.quartile(scholarityGroupVotes)
+      const variation = (standardDeviation / mean) * 100.0
+
+      relateScholarityMessage = `Você teve uma mediana de ${median.toFixed(
+        1
+      )} votos. Ainda mais, a partir do seu coeficiente de variação podemos afirmar que `
+
+      if (variation > 70.0)
+        relateScholarityMessage += `você teve votos de várias escolaridades, ou seja, pouca concentração em algumas.`
+      else
+        relateScholarityMessage +=
+          'você teve votos de poucas escolaridades, ou seja, uma concentração maior em algumas.'
+
+      relateScholarityMessage += ` Além disso, a partir dos quartis, podemos afirmar que 50% das escolaridades tiveram uma quantidade de voto entre ${Q1} e ${Q3} votos.`
+
+      this.messages.mostAndLeastScholarityVotesMessage = `Os eleitores ${withMostScholarity} ${mostScholarityVotes} apoiam sua campanha. Ainda mais, é indispensável rever as necessidades dos eleitores ${withLeastScholarity} ${leastScholarityVotes} que parecem não simpartizar com sua corrida eleitoral!`
+      this.messages.relateScholarityMessage = relateScholarityMessage
     },
     /**
      * This method informs the insights of the vote with relation to sex.

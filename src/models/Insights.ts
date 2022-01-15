@@ -30,8 +30,8 @@ export interface InsightsMessage {
   /**
    * Messages related to the scholarity.
    */
-  mostScholarityVotesMessage: string
-  leastScholarityVotesMessage: string
+  mostAndLeastScholarityVotesMessage: string
+  relateScholarityMessage: string
 
   /**
    * Messages related to the sex.
