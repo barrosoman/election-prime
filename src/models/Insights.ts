@@ -13,6 +13,7 @@ export interface InsightsMessage {
    * Messages related to the religion.
    */
   mostAndLeastReligionVotesMessage: string
+  relateReligionMessage: string
 
   /**
    * Messages related to the ethnicity.

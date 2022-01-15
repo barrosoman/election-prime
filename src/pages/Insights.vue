@@ -77,6 +77,9 @@
             <span class="votes-insight">{{
               messages.mostAndLeastReligionVotesMessage
             }}</span>
+            <span class="votes-insight">{{
+              messages.relateReligionMessage
+            }}</span>
           </div>
         </div>
         <div class="insights-item">
@@ -174,6 +177,7 @@ export default defineComponent({
   data() {
     return {
       candidate: undefined as string | undefined,
+      isCandidatePresident: false,
       dataVisualizer: DataVisualizer.defaultVisualizer() as DataVisualizer,
       dataInsighter: undefined as DataInsighter | undefined,
       presidentNames: [] as string[],
@@ -202,6 +206,10 @@ export default defineComponent({
 
         return
       }
+
+      this.isCandidatePresident = this.presidentNames.some(
+        (presidentName) => presidentName == this.candidate
+      )
 
       this.dataInsighter = new DataInsighter(
         this.candidate,
@@ -244,9 +252,16 @@ export default defineComponent({
         this.dataInsighter.getAgeVotesMostAndLeast()
 
       /* Votes by age group for this candidate */
-      const ageGroupVotes: number[] = this.dataVisualizer
-        .toPresidentsAgeGroupVote()
-        .filter((seriesData) => seriesData.name === this.candidate)[0].data
+      let ageGroupVotes: number[] = []
+
+      if (this.isCandidatePresident)
+        ageGroupVotes = this.dataVisualizer
+          .toPresidentsAgeGroupVote()
+          .filter((seriesData) => seriesData.name === this.candidate)[0].data
+      else
+        ageGroupVotes = this.dataVisualizer
+          .toGovernorsAgeGroupVote()
+          .filter((seriesData) => seriesData.name === this.candidate)[0].data
 
       /* Statistics Calculation */
       const mean = DataStatistics.mean(ageGroupVotes)
@@ -255,7 +270,9 @@ export default defineComponent({
       const variation = (standardDeviation / mean) * 100.0
 
       mostAndLeastGroupAgeMessage = `A faixa etária ${mostGroupAge} anos é a que mais está te apoiando nesta campanha. Por outro lado, devemos rever a faixa etária ${leastGroupAge} anos que mostra não seguir sua campanha!`
-      relateGroupAgeMessage = `Você teve uma média de ${mean} votos. Ainda mais, a partir do seu coeficiente de variação podemos afirmar que `
+      relateGroupAgeMessage = `Você teve uma média de ${mean.toFixed(
+        1
+      )} votos. Ainda mais, a partir do seu coeficiente de variação podemos afirmar que `
 
       if (variation > 70.0)
         relateGroupAgeMessage += `você teve votos de várias faixas etárias, ou seja, pouca concentração em alguns grupos.`
@@ -279,6 +296,7 @@ export default defineComponent({
 
       let mostReligionVotesInfo = ''
       let leastReligionVotesInfo = ''
+      let relateReligionMessage = ''
 
       if (mostReligionVotes !== 'Sem Religião')
         mostReligionVotesInfo = mostReligionVotes.toLowerCase() + 's'
@@ -288,7 +306,39 @@ export default defineComponent({
         leastReligionVotesInfo = leastReligionVotes.toLowerCase() + 's'
       else leastReligionVotesInfo = leastReligionVotes
 
+      /* Votes by age group for this candidate */
+      let religionGroupVotes: number[] = []
+
+      if (this.isCandidatePresident)
+        religionGroupVotes = this.dataVisualizer
+          .toPresidentsReligionVote()
+          .filter((seriesData) => seriesData.name === this.candidate)[0].data
+      else
+        religionGroupVotes = this.dataVisualizer
+          .toGovernorsReligionVote()
+          .filter((seriesData) => seriesData.name === this.candidate)[0].data
+
+      /* Statistics Calculation */
+      const mean = DataStatistics.mean(religionGroupVotes)
+      const standardDeviation =
+        DataStatistics.standardDeviation(religionGroupVotes)
+      const [Q1, Q3] = DataStatistics.quartile(religionGroupVotes)
+      const variation = (standardDeviation / mean) * 100.0
+
+      relateReligionMessage = `Você teve uma média de ${mean.toFixed(
+        1
+      )} votos. Ainda mais, a partir do seu coeficiente de variação podemos afirmar que `
+
+      if (variation > 70.0)
+        relateReligionMessage += `você teve votos de vários grupos religiosos, ou seja, pouca concentração em algumas.`
+      else
+        relateReligionMessage +=
+          'você teve votos de poucos grupos religiosos, ou seja, uma concentração maior em algumas.'
+
+      relateReligionMessage += ` Além disso, a partir dos quartis, podemos afirmar que 50% dos grupos religiosos tiveram uma quantidade de voto entre ${Q1} e ${Q3} votos.`
+
       this.messages.mostAndLeastReligionVotesMessage = `Os ${mostReligionVotesInfo} estão te apoiando imensamente nesta campanha. Contudo, visualizamos que o ${leastReligionVotesInfo} parece não estar te apoiando tanto quanto.`
+      this.messages.relateReligionMessage = relateReligionMessage
     },
     /**
      * This method informs the insights of the vote with relation to ethnicity.
