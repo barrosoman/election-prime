@@ -219,15 +219,6 @@ export class DataGenerator {
   }
 
   /**
-   * Returns a random selected religion from {@code DataGenerator#RELIGIONS}.
-   *
-   * @returns a random selected religion from {@code DataGenerator#RELIGIONS}
-   */
-  private randomReligion(): Religion {
-    return randomSelect(DataGenerator.RELIGIONS)
-  }
-
-  /**
    * Returns a random selected region from {@code DataGenerator#REGIONS}.
    *
    * @returns a random selected region from {@code DataGenerator#REGIONS}
