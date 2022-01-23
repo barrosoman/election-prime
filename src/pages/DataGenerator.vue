@@ -1,8 +1,8 @@
 <template>
   <Page name="Gerador de Dados">
     <Card
-      title="Configurações Preliminares"
-      subtitle="Realize as principais configurações dos parâmetros para a geração de dados"
+      title="Painel de Geração de Dados"
+      subtitle="Realize a geração de uma amostra teste de tamanho aleatório de no máximo 5000 pessoas."
     >
       <div class="user-generated-amount-container">
         <!-- <label>Quantos usuários deseja gerar no máximo?: </label>
