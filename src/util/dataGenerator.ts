@@ -99,6 +99,7 @@ export class DataGenerator {
 
   private readonly randomAgeFunction: () => number
   private readonly randomReligionFunction: () => Religion
+  private readonly randomScholarityFunction: () => Scholarity
   private readonly randomIncomeFunction: () => number
 
   constructor(presidentName: string) {
@@ -140,6 +141,21 @@ export class DataGenerator {
           20
         )
     } else this.randomIncomeFunction = () => randomInt(0, 20)
+
+    const randomizedScholarityMean = randomFloat(-0.1, 0.1) + 0.445
+    const randomizedScholarityStandardDeviation = randomFloat(-0.15, 0.15) + 0.2
+
+    this.randomScholarityFunction = () =>
+      randomSelect(DataGenerator.SCHOLARITIES, () =>
+        clamp(
+          0,
+          randomGaussian(
+            randomizedScholarityMean,
+            randomizedScholarityStandardDeviation
+          ),
+          0.9
+        )
+      )
   }
 
   /**
@@ -188,7 +204,7 @@ export class DataGenerator {
       religion: this.randomReligionFunction(),
       ethnicity: this.randomEthnicity(),
       region: this.randomRegion(),
-      scholarity: this.randomScholarity(),
+      scholarity: this.randomScholarityFunction(),
       sex: this.randomSex(),
       income: this.randomIncomeFunction(),
       ivp: this.presidentName,
