@@ -7,12 +7,7 @@ import {
   Sex
 } from '@/models/DataInfo'
 
-import {
-  randomGaussian,
-  randomInt,
-  randomFloat,
-  randomSelect
-} from '@/util/random'
+import { randomGaussian, randomInt, randomSelect } from '@/util/random'
 import clamp from './clamp'
 
 /**
@@ -83,17 +78,6 @@ export class DataGenerator {
    * This variable represents the sexes of the people who is voting.
    */
   static readonly SEXES: Sex[] = ['M', 'F']
-
-  /**
-   * This variable represents the president names.
-   */
-  static readonly PRESIDENT_NAMES: string[] = [
-    'Carlos Alves Rodrigues',
-    'Luan Santos Gomes',
-    'Rafael Correia Pinto',
-    'Julia Melo Martins',
-    'Rebeca Cardoso Goncalves'
-  ]
 
   /**
    * This variable represents the governors name.
@@ -248,15 +232,6 @@ export class DataGenerator {
    */
   private randomIncome(): number {
     return randomInt(DataGenerator.MINIMUM_INCOME, DataGenerator.MAXIMUM_INCOME)
-  }
-
-  /**
-   * Returns a random selected president name from {@code DataGenerator#PRESIDENT_NAMES}.
-   *
-   * @returns a random selected president name from {@code DataGenerator#PRESIDENT_NAMES}
-   */
-  private randomPresidentName(): string {
-    return randomSelect(DataGenerator.PRESIDENT_NAMES)
   }
 
   /**
