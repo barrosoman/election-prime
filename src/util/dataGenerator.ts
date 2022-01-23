@@ -240,15 +240,6 @@ export class DataGenerator {
   }
 
   /**
-   * Returns a random selected scholarity from {@code DataGenerator#SCHOLARITIES}.
-   *
-   * @returns a random selected scholarity from {@code DataGenerator#SCHOLARITIES}
-   */
-  private randomScholarity(): Scholarity {
-    return randomSelect(DataGenerator.SCHOLARITIES)
-  }
-
-  /**
    * Returns a random selected sex from {@code DataGenerator#SEXES}.
    *
    * @returns a random selected sex from {@code DataGenerator#SEXES}
