@@ -214,6 +214,17 @@ header {
   padding: 0.5rem 5.9%;
 }
 
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  .navbar ul li span {
+    font-size: calc(100% - 0.25rem);
+  }
+}
+
 .navbar ul {
   margin: 0;
   list-style: none;
