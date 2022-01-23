@@ -242,18 +242,6 @@ export class DataGenerator {
   }
 
   /**
-   * Returns a random generated number with uniformely distribution
-   * in the interval defined by [{@code DataGenerator#MINIMUM_INCOME},
-   * {@code DataGenerator#MAXIMUM_INCOME}].
-   *
-   * @returns a random generated number with uniformely distribution in
-   *          the defined interval.
-   */
-  private randomIncome(): number {
-    return randomInt(DataGenerator.MINIMUM_INCOME, DataGenerator.MAXIMUM_INCOME)
-  }
-
-  /**
    * Returns a random selected governor name from {@code DataGenerator#GOVERNOR_NAMES}.
    *
    * @returns a random selected governor name from {@code DataGenerator#GOVERNOR_NAMES}
