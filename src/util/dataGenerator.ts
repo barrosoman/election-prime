@@ -228,15 +228,6 @@ export class DataGenerator {
   }
 
   /**
-   * Returns a random selected ethnicity from {@code DataGenerator#ETHNICITIES}.
-   *
-   * @returns a random selected ethnicity from {@code DataGenerator#ETHNICITIES}
-   */
-  private randomEthnicity(): Ethnicity {
-    return randomSelect(DataGenerator.EHTNICITIES)
-  }
-
-  /**
    * Returns a random selected region from {@code DataGenerator#REGIONS}.
    *
    * @returns a random selected region from {@code DataGenerator#REGIONS}
