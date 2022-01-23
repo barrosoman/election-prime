@@ -7,7 +7,12 @@ import {
   Sex
 } from '@/models/DataInfo'
 
-import { randomGaussian, randomInt, randomSelect } from '@/util/random'
+import {
+  randomGaussian,
+  randomInt,
+  randomFloat,
+  randomSelect
+} from '@/util/random'
 import clamp from './clamp'
 
 /**
@@ -94,6 +99,7 @@ export class DataGenerator {
 
   private readonly randomAgeFunction: () => number
   private readonly randomReligionFunction: () => Religion
+  private readonly randomIncomeFunction: () => number
 
   constructor(presidentName: string) {
     this.presidentName = presidentName
@@ -119,6 +125,21 @@ export class DataGenerator {
           0.99
         )
       )
+
+    if (Math.random() > 0.25) {
+      const randomizedIncomeMean = randomFloat(-2, 5) + 3
+      const randomizedIncomeStandardDeviation = randomFloat(0, 5) + 1.5
+
+      this.randomIncomeFunction = () =>
+        clamp(
+          0,
+          randomGaussian(
+            randomizedIncomeMean,
+            randomizedIncomeStandardDeviation
+          ),
+          20
+        )
+    } else this.randomIncomeFunction = () => randomInt(0, 20)
   }
 
   /**
@@ -169,7 +190,7 @@ export class DataGenerator {
       region: this.randomRegion(),
       scholarity: this.randomScholarity(),
       sex: this.randomSex(),
-      income: this.randomIncome(),
+      income: this.randomIncomeFunction(),
       ivp: this.presidentName,
       ivg: this.randomGovernorName()
     }
