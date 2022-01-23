@@ -111,8 +111,6 @@ export class DataGenerator {
     const randomizedMean = Math.random()
     const randomizedStandardDeviation = clamp(0.1, Math.random(), 0.7)
 
-    console.log(`m: ${randomizedMean}, stdDev: ${randomizedStandardDeviation}`)
-
     this.randomReligionFunction = () =>
       randomSelect(DataGenerator.RELIGIONS, () =>
         clamp(
