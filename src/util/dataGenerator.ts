@@ -99,6 +99,7 @@ export class DataGenerator {
 
   private readonly randomAgeFunction: () => number
   private readonly randomReligionFunction: () => Religion
+  private readonly randomEthnicityFunction: () => Ethnicity
   private readonly randomScholarityFunction: () => Scholarity
   private readonly randomIncomeFunction: () => number
 
@@ -141,6 +142,11 @@ export class DataGenerator {
           20
         )
     } else this.randomIncomeFunction = () => randomInt(0, 20)
+
+    this.randomEthnicityFunction = () =>
+      randomSelect(DataGenerator.EHTNICITIES, () =>
+        clamp(0, randomGaussian(0.35, 0.5), 0.9)
+      )
 
     const randomizedScholarityMean = randomFloat(-0.1, 0.1) + 0.445
     const randomizedScholarityStandardDeviation = randomFloat(-0.15, 0.15) + 0.2
@@ -202,7 +208,7 @@ export class DataGenerator {
     return {
       age: this.randomAgeFunction(),
       religion: this.randomReligionFunction(),
-      ethnicity: this.randomEthnicity(),
+      ethnicity: this.randomEthnicityFunction(),
       region: this.randomRegion(),
       scholarity: this.randomScholarityFunction(),
       sex: this.randomSex(),
