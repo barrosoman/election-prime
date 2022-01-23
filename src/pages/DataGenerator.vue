@@ -45,10 +45,9 @@ export default defineComponent({
   },
   methods: {
     generateData() {
-      alert(`Testing Data Generator v1.0.25!`)
       const firstDataGenerator = new DataGenerator('Carlos Alves Rodrigues')
       const secondDataGenerator = new DataGenerator('Luan Santos Gomes')
-      const thirdDataGenerator = new DataGenerator('Rafael Correia Pinto')
+      const thirdDataGenerator = new DataGenerator('Rafael Correia Silva')
       const fourthDataGenerator = new DataGenerator('Julia Melo Martins')
       const fifthDataGenerator = new DataGenerator('Rebeca Cardoso Goncalves')
 
