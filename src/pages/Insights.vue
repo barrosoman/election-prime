@@ -11,6 +11,7 @@
         name="candidate"
         id="candidate"
         class="candidate-selection"
+        @change="removeShowInsights"
       >
         <optgroup label="Presidentes">
           <option
@@ -192,6 +193,9 @@ export default defineComponent({
     this.governorsNames = this.dataVisualizer.toGovernorsName()
   },
   methods: {
+    removeShowInsights() {
+      this.showInsights = false
+    },
     /**
      * This method will be called when the user clicks on the button
      * to calculate the insights.
