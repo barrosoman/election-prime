@@ -658,7 +658,7 @@ export default defineComponent({
   display: grid;
   grid-template-columns: 10% 1fr;
   border-bottom: 1px solid #e9e9ef;
-  height: 80px;
+  min-height: 80px;
 }
 
 .insights-item:nth-child(even) {
