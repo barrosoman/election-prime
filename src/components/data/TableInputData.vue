@@ -68,7 +68,7 @@
           <td>M</td>
           <td>14</td>
           <td>Álvaro Castro</td>
-          <td>Márcia Souza</td>
+          <td>Laura Oliveira Dias</td>
         </tr>
         <tr>
           <td>81</td>
@@ -79,7 +79,7 @@
           <td>F</td>
           <td>8</td>
           <td>Marina Martins Souza</td>
-          <td>João Oliveira Lima</td>
+          <td>Márcia Souza</td>
         </tr>
         <tr>
           <td>49</td>
@@ -90,7 +90,7 @@
           <td>F</td>
           <td>1</td>
           <td>Marina Martins Souza</td>
-          <td>Márcia Souza</td>
+          <td>Melissa Gonçalves Costa</td>
         </tr>
         <tr>
           <td>48</td>
@@ -123,7 +123,7 @@
           <td>M</td>
           <td>15</td>
           <td>Álvaro Castro</td>
-          <td>João Oliveira Lima</td>
+          <td>Marcos Castro da Silva</td>
         </tr>
         <tr>
           <td>22</td>
@@ -134,7 +134,7 @@
           <td>M</td>
           <td>1</td>
           <td>Rodrigo Fernandes</td>
-          <td>Melissa Gonçalves Costa</td>
+          <td>João Oliveira Lima</td>
         </tr>
         <tr>
           <td>23</td>
@@ -145,7 +145,7 @@
           <td>F</td>
           <td>7</td>
           <td>Marina Martins Souza</td>
-          <td>João Oliveira Lima</td>
+          <td>Laura Oliveira Dias</td>
         </tr>
         <tr>
           <td>47</td>
@@ -156,7 +156,7 @@
           <td>M</td>
           <td>15</td>
           <td>Ryan Castro Cavalcanti</td>
-          <td>Laura Oliveira Dias</td>
+          <td>Marcos Castro da Silvas</td>
         </tr>
         <tr>
           <td>42</td>
@@ -167,7 +167,7 @@
           <td>M</td>
           <td>11</td>
           <td>Ryan Castro Cavalcanti</td>
-          <td>Laura Oliveira Dias</td>
+          <td>Melissa Gonçalves Costa</td>
         </tr>
         <tr>
           <td>65</td>
@@ -178,7 +178,7 @@
           <td>M</td>
           <td>19</td>
           <td>Ryan Castro Cavalcanti</td>
-          <td>Laura Oliveira Dias</td>
+          <td>Melissa Gonçalves Costa</td>
         </tr>
         <tr>
           <td>61</td>
@@ -189,7 +189,7 @@
           <td>F</td>
           <td>13</td>
           <td>Marina Martins Souza</td>
-          <td>João Oliveira Lima</td>
+          <td>Melissa Gonçalves Costa</td>
         </tr>
         <tr>
           <td>44</td>
@@ -200,7 +200,7 @@
           <td>M</td>
           <td>4</td>
           <td>Ryan Castro Cavalcanti</td>
-          <td>Laura Oliveira Dias</td>
+          <td>Melissa Gonçalves Costa</td>
         </tr>
         <tr>
           <td>20</td>
@@ -211,7 +211,7 @@
           <td>F</td>
           <td>18</td>
           <td>Álvaro Castro</td>
-          <td>João Oliveira Lima</td>
+          <td>Melissa Gonçalves Costa</td>
         </tr>
         <tr>
           <td>77</td>
@@ -222,7 +222,7 @@
           <td>F</td>
           <td>14</td>
           <td>Rodrigo Fernandes</td>
-          <td>Laura Oliveira Dias</td>
+          <td>Márcia Souza</td>
         </tr>
         <tr>
           <td>57</td>
@@ -233,7 +233,7 @@
           <td>M</td>
           <td>16</td>
           <td>Álvaro Castro</td>
-          <td>Laura Oliveira Dias</td>
+          <td>Márcia Souza</td>
         </tr>
         <tr>
           <td>51</td>
@@ -244,7 +244,7 @@
           <td>F</td>
           <td>19</td>
           <td>Ryan Castro Cavalcanti</td>
-          <td>Melissa Gonçalves Costa</td>
+          <td>Márcia Souza</td>
         </tr></template
       >
     </StripedTable>
