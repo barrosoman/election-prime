@@ -97,7 +97,7 @@
             }}</span>
           </div>
         </div>
-        <div class="insights-item">
+        <div class="insights-item" v-if="isCandidatePresident">
           <div class="insights-item-category">
             <h1>Região</h1>
           </div>
