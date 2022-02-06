@@ -1,5 +1,7 @@
 <p align="center"><img src="https://i.imgur.com/lEGHtwC.png"></p>
 
+##### Troque para [Português Brasileiro](./README.pt.md) 🇧🇷.
+
 ## :fountain_pen: About
 Election Prime is a political survey research analysis website with the goal to assist the candidate's political team providing solutions and strategies aiming the candidate victory. In summary, the website receive a survey research made by the candidate team and provides comparative infographics, statistics measures and insights about that data sample.
 
